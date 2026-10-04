@@ -47,9 +47,6 @@ class Features:
     blink: float = 0.0     # 0 = eyes open, 1 = eyes shut
     jaw: float = 0.0       # 0 = mouth closed, 1 = wide open
     mic: float = 0.0       # ambient loudness (RMS), context only
-    smile: float = 0.0     # 0 = neutral, 1 = full smile (interview coach)
-    brow: float = 0.0      # 0 = relaxed, 1 = furrowed brow (interview coach)
-    face_w: float = 0.0    # face width in the frame (0-1), for lean/distance
 
 
 @dataclass
@@ -60,7 +57,6 @@ class Baseline:
     gaze_v: float = 0.0
     blink: float = 0.1
     jaw: float = 0.05
-    face_w: float = 0.0    # typical face width when sitting naturally
 
 
 class Calibrator:
@@ -96,7 +92,7 @@ class Calibrator:
             yaw=circ_mean([x.yaw for x in s]),
             pitch=circ_mean([x.pitch for x in s]),
             gaze_h=med("gaze_h"), gaze_v=med("gaze_v"),
-            blink=med("blink"), jaw=med("jaw"), face_w=med("face_w"),
+            blink=med("blink"), jaw=med("jaw"),
         )
 
 

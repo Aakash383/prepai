@@ -1,13 +1,11 @@
 # Tether - a personal focus coach (laptop only)
 
-Two apps, one engine:
+Tether watches *you* (webcam), hears how loud your room is (mic level only), sees which app you are in, and:
 
-1. **Focus coach** (`tether.py`) - watches *you* (webcam), hears how loud your room is (mic level only), sees which app you are in, and:
-   - shows a live **focus score** with a moving gauge needle,
-   - **nudges** you the moment you drift (flash + sound),
-   - suggests **breaks** (25 min of work, or 3 yawns in 10 min),
-   - writes a **session report** that shows when focus peaked, when it fell, and what was going on.
-2. **Interview coach** (`interview.py`) - give it your resume, the role and the job description. Claude writes questions for THAT job, listens (local Whisper) and watches (webcam) while you answer, scores every answer, and ends with a full review: content, delivery, body language, top fixes and a practice plan. `--live` mode reviews a real interview afterwards.
+1. shows a live **focus score** with a moving gauge needle,
+2. **nudges** you the moment you drift (flash + sound),
+3. suggests **breaks** (25 min of work, or 3 yawns in 10 min),
+4. writes a **session report** that shows when focus peaked, when it fell, and what was going on.
 
 No extra hardware. No video or audio is ever saved.
 
@@ -15,21 +13,11 @@ No extra hardware. No video or audio is ever saved.
 
 ```bash
 pip install -r requirements.txt
-python tether.py      # focus coach
+python tether.py
 ```
 
 The face model (~4 MB) downloads automatically on first run.
 Optional AI coach: `set ANTHROPIC_API_KEY=your_key` (Windows) / `export ANTHROPIC_API_KEY=...` (Mac/Linux).
-
-### Interview coach
-
-```bash
-export ANTHROPIC_API_KEY=sk-ant-...     # required for this mode
-python interview.py --resume resume.pdf --role "Backend Engineer" --jd jd.txt
-python interview.py --live              # review a real interview afterwards
-```
-
-Speech is transcribed locally by Whisper (first run downloads the model; pick a bigger one with `--whisper small.en`). Keys: SPACE start/stop answer, N next question, R retry, S skip, Q finish and open the review. Sessions are saved to `interview_sessions/` so you can track progress per role. Models can be overridden with `TETHER_MODEL` (deep review) and `TETHER_FAST_MODEL` (per-answer feedback).
 
 ## Using it
 
@@ -50,16 +38,10 @@ Flags: `--camera 1`, `--calib 10`, `--no-mic`, `--no-window`, `--no-sound`, `--o
 
 | File | Job |
 |---|---|
-| `tether.py` | live focus app: camera, calibration, gauge HUD, nudges, CSV log |
+| `tether.py` | live app: camera, calibration, gauge HUD, nudges, CSV log |
 | `scoring.py` | the scoring + drift logic (pure Python, easy to tune/test) |
-| `report.py` | builds the focus HTML report; `python report.py --demo` makes a sample |
-| `interview.py` | live interview coach: camera + mic, questions, per-answer feedback |
-| `behavior.py` | body-language stats for the interview coach (eye contact, posture, motion) |
-| `speech.py` | mic recorder, local Whisper transcription, pace/filler/pause analysis |
-| `coach.py` | Claude calls: question generation, per-answer scoring, final review |
-| `interview_report.py` | builds the interview-review HTML report |
+| `report.py` | builds the HTML report; `python report.py --demo` makes a sample |
 | `focus_log_*.csv` | one row per second plus events (created each session) |
-| `interview_sessions/` | saved practice sessions + reviews (created by interview.py) |
 
 ## How the score works
 

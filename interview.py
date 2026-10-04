@@ -13,7 +13,7 @@ Keys:  SPACE start/stop answer   N next question   R try the same question again
        S skip question           Q finish and open the review
 
 Privacy: audio stays in memory and is transcribed locally by Whisper; no video is stored.
-Only text (resume, job description, transcript, numbers) is sent to the Anthropic API.
+Only text (resume, job description, transcript, numbers) is sent to the Gemini API.
 """
 import argparse
 import glob
@@ -29,6 +29,7 @@ import cv2
 import numpy as np
 
 import coach
+import llm
 import speech
 import tether
 from behavior import BehaviorStats
@@ -50,6 +51,25 @@ DEFAULT_QUESTIONS = [
 
 
 # ============================================================ helpers
+def check_versions():
+    """Return a message if any file in this folder is an older copy, else None."""
+    import inspect
+    from scoring import Baseline, Features
+    stale = []
+    if not hasattr(Baseline(), "face_w") or not hasattr(Features(), "smile"):
+        stale.append("scoring.py")
+    if "vad" not in inspect.signature(speech.Transcriber.transcribe).parameters:
+        stale.append("speech.py")
+    if "separated" not in inspect.signature(coach.final_review).parameters:
+        stale.append("coach.py")
+    if "face_w" not in inspect.getsource(tether.extract_features):
+        stale.append("tether.py")
+    if stale:
+        return ("These files are out of date: " + ", ".join(stale) +
+                ". Download ALL files again from the latest version and overwrite the old ones.")
+    return None
+
+
 def safe(text):
     """OpenCV fonts are ASCII-only: replace common Unicode punctuation."""
     for a, b in (("\u2019", "'"), ("\u2018", "'"), ("\u201c", '"'), ("\u201d", '"'),
@@ -233,7 +253,7 @@ class InterviewApp:
         o_sp, o_bh = aggregate(self.answers)
         prev = previous_session(self.role) if not self.live else None
         review, review_error = {}, None
-        self.final_status = "Writing your review with Claude..."
+        self.final_status = "Writing your review with Gemini..."
         if usable:
             try:
                 review = coach.final_review(self.ctx, self.role, mode, usable, o_sp, o_bh, prev)
@@ -271,7 +291,7 @@ class InterviewApp:
         L = [(f"{sp['wpm']:.0f} wpm  |  {sp['fillers']} fillers  |  eye contact {bh['eye_contact_pct']:.0f}%",
               WHITE, 0.5)]
         if rec["status"] == "evaluating":
-            return L + [("Claude is reviewing your answer...", GREY, 0.55)]
+            return L + [("Gemini is reviewing your answer...", GREY, 0.55)]
         ev = rec["eval"] or {}
         score = ev.get("score")
         if isinstance(score, (int, float)):
@@ -279,6 +299,9 @@ class InterviewApp:
                 (a.get("eval") or {}).get("score"), (int, float))]
             tail = f"   ({score - prev[-1]['eval']['score']:+.0f} vs last try)" if prev else ""
             L.insert(0, (f"Answer score: {score:.0f}/100{tail}", tether.score_color(score), 0.8))
+        rel = ev.get("relevance") or {}
+        if rel.get("verdict"):
+            L.append((f"Relevance to the role: {rel['verdict']}", WHITE, 0.5))
         for tip in ev.get("improvements", [])[:3]:
             L.append(("- " + tip, WHITE, 0.5))
         return L
@@ -440,7 +463,7 @@ def draw_ui(frame, ui):
         tether.put(canvas, "Reading resume + job description", (px, y + 32), 0.5, GREY)
         tether.put(canvas, "Loading speech model (first run downloads it)", (px, y + 54), 0.5, GREY)
         if ui["prep_error"]:
-            for i, l in enumerate(wrap("Could not reach Claude: " + ui["prep_error"], pw)[:4]):
+            for i, l in enumerate(wrap("Could not reach Gemini: " + ui["prep_error"], pw)[:4]):
                 tether.put(canvas, l, (px, y + 90 + i * 20), 0.45, tether.COL_BAD)
     elif st in ("READY", "ANSWERING", "FEEDBACK") and ui["question"]:
         q = ui["question"]
@@ -529,9 +552,13 @@ def parse_args():
 
 def main():
     args = parse_args()
-    if not os.environ.get("ANTHROPIC_API_KEY"):
-        sys.exit("[ERR] Set your key first:  set ANTHROPIC_API_KEY=sk-ant-...   (Windows)\n"
-                 "                          export ANTHROPIC_API_KEY=sk-ant-... (Mac/Linux)")
+    problem = check_versions()
+    if problem:
+        sys.exit("[ERR] " + problem)
+    if not llm.has_key():
+        sys.exit("[ERR] Set your free Gemini key first (aistudio.google.com/apikey):\n"
+                 "         set GEMINI_API_KEY=your_key      (Windows)\n"
+                 "         export GEMINI_API_KEY=your_key   (Mac/Linux)")
     if args.live and not args.yes:
         print("LIVE MODE records your microphone (kept in memory, transcribed locally, then discarded).\n"
               "If another person will be heard, make sure they know and agree to this before you start.")

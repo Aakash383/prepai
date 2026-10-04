@@ -1,0 +1,282 @@
+{
+ "version": 1,
+ "created": "2026-10-03T21:06:35",
+ "role": "SOC Analyst",
+ "mode": "practice",
+ "brief": {
+  "fit_score": 58,
+  "summary": "Aakash has strong hands-on SOC-relevant skills (Splunk, KQL/SPL, Azure Logic Apps SOAR, Defender EDR, MITRE ATT&CK) and a relevant cybersecurity master's in progress. However, the role requires 2+ years as a SOC analyst, and his experience is mostly labs, projects, and a 'Security Automation Intern' entry, with no clearly documented production SOC tenure.",
+  "strengths": [
+   "Hands-on SIEM and detection work: deployed Splunk in a home SOC lab with 3+ log sources, wrote custom SPL queries, and curated 60 validated IOCs, directly matching the JD's SIEM triage and investigation duties.",
+   "SOAR and automation experience: built Azure Logic Apps workflows with playbooks and API integrations that reduced manual triage by 40%, plus Python/PowerShell scripting, which aligns with the JD's SIEM/SOAR configuration and scripting preferences.",
+   "Strong technical foundation: Wireshark PCAP analysis, TCP/IP, DNS, DHCP knowledge, MITRE ATT&CK/NIST alignment, Microsoft Defender EDR, and an IEEE-published phishing detection project, supporting the JD's 'variety of Internet protocols' and threat detection requirements."
+  ],
+  "gaps": [
+   "No clearly stated 2+ years of professional SOC analyst experience; much of the work is lab or project-based, and the role lists this as required.",
+   "Security Plus is only 'in progress' and he holds no GCIH or CySA+; cloud experience is mostly Azure-adjacent with only an intro AWS course.",
+   "Resume metrics (40% less triage, 25% MTTR, 30% fewer false positives, 35% efficiency) and the timeline (internship dates overlapping with study, a Danfoss hardware role labeled 'Security Automation') may be probed for context, scale, and how they were measured."
+  ],
+  "jd_keywords": [
+   "SIEM",
+   "SOAR",
+   "Incident triage",
+   "Threat detection",
+   "Security event monitoring",
+   "Incident response escalation",
+   "Threat intelligence",
+   "Azure/AWS",
+   "Python scripting",
+   "Internet protocols",
+   "Security policy enforcement",
+   "Communication"
+  ],
+  "questions": [
+   {
+    "q": "Tell me about yourself and what led you toward a SOC analyst role.",
+    "type": "intro",
+    "why": "Tests how clearly he frames his background (education, labs, automation) and motivation for the role."
+   },
+   {
+    "q": "On your resume you built Azure Logic Apps SOAR workflows that cut manual triage by 40%. Can you walk me through one workflow, what triggered it, what it did, and how you measured that reduction?",
+    "type": "resume",
+    "why": "Validates the depth and authenticity of his SOAR experience and the metric behind it."
+   },
+   {
+    "q": "In your Splunk home lab you reduced false positives by 30% through PCAP analysis. What was one specific alert you tuned, and how did you decide it was a false positive?",
+    "type": "resume",
+    "why": "Probes real investigation reasoning and tuning skills versus lab setup."
+   },
+   {
+    "q": "This role asks for two or more years of hands-on SOC experience, and much of your work has been in labs and projects. How would you show me you're ready to handle a live alert queue?",
+    "type": "gap",
+    "why": "Directly addresses the biggest risk: lack of documented production SOC tenure."
+   },
+   {
+    "q": "Suppose Defender flags a workstation for suspicious PowerShell execution that spawned an outbound connection to an unfamiliar IP. How would you triage it, and when would you escalate to Incident Response?",
+    "type": "technical",
+    "why": "Tests triage methodology, EDR/network analysis, use of MITRE ATT&CK, and escalation judgment."
+   },
+   {
+    "q": "Tell me about a time you had to explain a technical issue or finding to a non-technical stakeholder or leader under time pressure. How did you make it clear and actionable?",
+    "type": "behavioral",
+    "why": "Probes communication, which the JD stresses for notifying management and giving detailed recounts to responders."
+   }
+  ]
+ },
+ "answers": [
+  {
+   "q_idx": 0,
+   "attempt": 1,
+   "question": "Tell me about yourself and what led you toward a SOC analyst role.",
+   "qtype": "intro",
+   "duration": 43.8,
+   "behavior": {
+    "seconds": 43.840277100000094,
+    "face_visible_pct": 100.0,
+    "eye_contact_pct": 35.332566134710866,
+    "smile_pct": 87.48306748269593,
+    "tension_pct": 1.3845259203447755,
+    "head_motion_dps": 9.308882451140297,
+    "lean_back_pct": 1.3517923224965638,
+    "too_close_pct": 0.4745711335860964,
+    "blink_rate": 16.0,
+    "away_events": 3,
+    "longest_away_s": 5.422374899997521,
+    "ec_by_minute": [
+     35.332566134710866
+    ]
+   },
+   "status": "done",
+   "transcript": "Oh, I'm, uh, Akash. I'm doing, uh, Master's in Cyber Security at University of Michigan, day one. Uh, I know a guy, Navin, who is not even interested in doing, uh, Masters. He's gay! He's gay! Look at him! So, yeah, another guy came in, like, his name was Marion. He wrote. Me and Kirk. Icon, actually. Icon, Mike, Icon, is lowering in here.",
+   "lines": [
+    [
+     2.6000000000000005,
+     "Oh, I'm, uh, Akash. I'm doing, uh, Master's in Cyber Security at University of Michigan, day one. Uh, I know a guy, Navin, who is not even interested in doing, uh, Masters. He's gay! He's gay! Look at him!"
+    ],
+    [
+     27.220000000000002,
+     "So, yeah, another guy came in, like, his name was Marion."
+    ],
+    [
+     32.0,
+     "He wrote."
+    ],
+    [
+     32.9,
+     "Me and Kirk."
+    ],
+    [
+     34.4,
+     "Icon, actually."
+    ],
+    [
+     38.44,
+     "Icon, Mike, Icon, is lowering in here."
+    ]
+   ],
+   "speech": {
+    "duration": 43.8,
+    "words": 64,
+    "wpm": 96.7741935483871,
+    "latency": 2.6000000000000005,
+    "fillers": 6,
+    "filler_per_min": 9.07258064516129,
+    "top_fillers": [
+     [
+      "um/uh",
+      4
+     ],
+     [
+      "like",
+      1
+     ],
+     [
+      "actually",
+      1
+     ]
+    ],
+    "hedges": 0,
+    "long_pauses": 3,
+    "longest_pause": 3.5799999999999983,
+    "energy_cv": 0.5779314041137695
+   },
+   "eval": {
+    "score": 8,
+    "relevance": {
+     "verdict": "partly relevant",
+     "note": "Answer starts with educational background but derails into incoherent commentary about peers, failing to explain motivation for SOC analyst role."
+    },
+    "scores": {
+     "relevance": 3,
+     "structure": 2,
+     "specificity": 2,
+     "confidence": 4,
+     "role_fit": 3
+    },
+    "strengths": [
+     "Correctly identifies current enrollment in Master's in Cybersecurity at University of Michigan, showing commitment to field",
+     "Maintains eye contact (35%) and positive affect (87% smiling) despite disorganized content"
+    ],
+    "improvements": [
+     "Remove off-topic commentary about peers entirely; focus on your cybersecurity journey and SOC-relevant projects from resume",
+     "Explain how specific projects (SOC lab, SIEM/Splunk work, alert triage automation) directly led you toward SOC analyst role",
+     "Slow your speech pace (97 wpm is quite fast); reduce filler words (9.1/min vs. benchmark <3/min) by pausing instead"
+    ],
+    "missing_keywords": [
+     "SOC monitoring",
+     "SIEM/Splunk",
+     "incident triage",
+     "threat detection",
+     "alert analysis",
+     "security operations"
+    ],
+    "better_answer": "I'm Aakash, pursuing a Master's in Cybersecurity at University of Michigan. My journey toward SOC analysis stems from hands-on experience building a home SOC lab where I deployed Splunk, integrated multiple log sources including EDR and firewall telemetry, and created custom detection queries. I've also developed SOAR automation workflows using Azure Logic Apps for incident triage, reducing manual analyst work by 40%. Through projects analyzing EDR data and simulating security events, I've gained expertise in threat classification and MITRE ATT&CK alignment. I'm eager to apply this technical foundation and attention to detail in a professional SOC environment."
+   },
+   "error": null
+  }
+ ],
+ "overall_speech": {
+  "duration": 43.8,
+  "words": 64,
+  "wpm": 96.7741935483871,
+  "latency": 2.6000000000000005,
+  "fillers": 6,
+  "filler_per_min": 9.07258064516129,
+  "top_fillers": [
+   [
+    "um/uh",
+    4
+   ],
+   [
+    "like",
+    1
+   ],
+   [
+    "actually",
+    1
+   ]
+  ],
+  "hedges": 0,
+  "long_pauses": 3,
+  "longest_pause": 3.5799999999999983,
+  "energy_cv": 0.5779314041137695
+ },
+ "overall_behavior": {
+  "face_visible_pct": 100.0,
+  "eye_contact_pct": 35.332566134710866,
+  "smile_pct": 87.48306748269593,
+  "tension_pct": 1.3845259203447755,
+  "head_motion_dps": 9.308882451140297,
+  "lean_back_pct": 1.3517923224965638,
+  "too_close_pct": 0.4745711335860964,
+  "blink_rate": 16.0,
+  "seconds": 43.840277100000094,
+  "away_events": 3,
+  "longest_away_s": 5.422374899997521,
+  "ec_by_minute": [
+   35.332566134710866
+  ]
+ },
+ "review": {
+  "overall_score": 14,
+  "readiness": "Not yet",
+  "headline": "The answer never got to your SOC story: you gave your name and program, then drifted into off-topic remarks about other people, which would end an interview quickly.",
+  "content": {
+   "score": 1,
+   "summary": "The only relevant content was your name and that you're doing a Master's in Cybersecurity at University of Michigan. The rest was off-topic talk about other people, and a derogatory remark about someone that would be a serious red flag in any interview. You said nothing about why SOC work appeals to you, and nothing about your Splunk home lab, Azure Logic Apps SOAR workflows or phishing-detection project, which are your strongest material. (The automated score of 8 for this answer doesn't match the transcript; treat it as a 1-2.)"
+  },
+  "delivery": {
+   "score": 3,
+   "summary": "You spoke 64 words in 44 seconds, about 97 wpm by the report. That is slower than the 120-165 wpm benchmark, not faster as the earlier feedback suggested. Filler words ran at 9.1/min (uh x4, like x1, actually x1) against a target under 3/min, and there were 3 long pauses, the longest 3.6s. The first word came at 2.6s, which is fine. The sentences broke off ('He wrote. Me and Kirk. Icon, actually.'), so the thread was hard to follow."
+  },
+  "body_language": {
+   "score": 4,
+   "summary": "Eye contact was about 35%, below the 55-80% range that reads as natural. You looked away for 2s+ three times, once for 5s, which tends to read as searching for words. Head motion of 9.3 deg/s is above the ~6 deg/s steady range, so you came across as somewhat restless. On the positive side, you stayed fully in frame, didn't lean back or crowd the camera, and your face showed a smile much of the time, which is a warm tendency to keep."
+  },
+  "strengths": [
+   "You started speaking within 2.6s of the question, so you didn't freeze at the start.",
+   "Framing and posture were good: 100% in frame, not too close, not leaning back, and a generally friendly expression.",
+   "You have strong, relevant material to draw on: a Splunk home SOC lab with 3+ log sources, SOAR workflows in Azure Logic Apps, KQL/SPL detection work, and a published phishing-detection model."
+  ],
+  "top_improvements": [
+   {
+    "title": "Answer the question with a focused 60-90 second story",
+    "detail": "Your answer stopped after your name and program, then moved to talk about other people. Use a three-part structure: (1) present: Master's in Cybersecurity and Information Assurance at University of Michigan-Dearborn; (2) proof: your Splunk home SOC lab with EDR, firewall and endpoint logs, custom SPL queries, and the Wireshark PCAP analysis that you say cut false positives by 30%; plus the Azure Logic Apps SOAR triage workflows you say cut manual triage by 40%; (3) why SOC: you enjoy investigating alerts and turning findings into clear reports for responders, and you want to grow into a SOC Analyst role. Say only what is true and be ready to explain each project.",
+    "drill": "Write three sentences (present, proof, why SOC) in 5 minutes. Record yourself giving them in 60-90 seconds. Repeat until you can say them without notes."
+   },
+   {
+    "title": "Keep the answer professional and about you",
+    "detail": "Mentioning other people, and mocking one of them with a derogatory remark about their identity, will lose an interviewer's trust immediately. The SOC role involves escalating sensitive incidents to management and working with many teams, so judgment and professionalism are core. Never talk about peers unless it is a positive, relevant teamwork example, and never use jokes at someone's expense.",
+    "drill": "Make a list of 5 'safe' topics: your program, 2 projects, 1 tool you enjoy, 1 goal. Practise the answer using only these. If you drift, stop, take a breath and return to the list."
+   },
+   {
+    "title": "Reduce fillers and anchor your eyes",
+    "detail": "Fillers were 9.1/min and you looked away for up to 5s, probably while hunting for words. Having a three-point outline lets you pause silently instead of saying 'uh'. Look at the camera lens when you start and finish each sentence, and keep your head steadier.",
+    "drill": "Do three takes of your 60-second answer. In take 1 count your fillers. In take 2 replace each with a one-second silent pause. In take 3 put a sticky note next to the lens and look at it at the start and end of every sentence."
+   }
+  ],
+  "jd_coverage": {
+   "covered": [],
+   "missing": [
+    "SIEM experience (Splunk home lab, SPL queries)",
+    "Triage and investigation of alerts using EDR and network tools (Microsoft Defender, Wireshark)",
+    "SOAR configuration (Azure Logic Apps)",
+    "Scripting (Python, PowerShell, KQL)",
+    "Cloud familiarity (Azure, AWS)",
+    "Clear, concise communication of incidents",
+    "Internet protocol knowledge (TCP/IP, DNS, DHCP)",
+    "Motivation for SOC work and fit with a team-oriented culture",
+    "Certifications (Security+ in progress)",
+    "How your experience relates to the 2+ years SOC requirement"
+   ]
+  },
+  "practice_plan": [
+   "Write and rehearse a 60-90 second 'tell me about yourself' using the present, proof, why-SOC structure and only facts from your resume.",
+   "Record 3 takes, aiming for under 3 fillers/min, 120-165 wpm, eye contact above 55% and steadier head movement, then compare against this attempt.",
+   "Prepare two short stories from your Splunk lab and SOAR workflows (situation, what you did, result) to use when asked follow-up questions."
+  ],
+  "qa_breakdown": []
+ },
+ "review_error": null,
+ "prev_score": null
+}

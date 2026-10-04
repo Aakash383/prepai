@@ -1,0 +1,382 @@
+{
+ "version": 1,
+ "created": "2026-10-03T21:14:18",
+ "role": "Machine Learning Engineer",
+ "mode": "practice",
+ "brief": {
+  "fit_score": 86,
+  "summary": "Naren's current research closely mirrors the role: a Simulink-to-Python pipeline, physics-based features, and an early-warning model for bus voltage collapse validated in closed loop. The main risks are how well the results generalize (one held-out bus, perfect scores), thin power-systems depth beyond this one project, and RL experience that so far lies outside the grid domain.",
+  "strengths": [
+   "Direct match to the core duties: built a 13-step pipeline from Simulink simulation to ML training, with 992 physics-based features (grid-wide aggregates, ring-adjacent imbalances, lags, rolling statistics) from 80 base signals.",
+   "Evaluates in the terms the JD names: 96% recall, zero false alarms and a 30-second lead time on a held-out bus, plus closed-loop validation where all 10 buses survived after shedding the affected bus to 30% load.",
+   "Covers many preferred qualifications: RL with custom reward design (smart greenhouse, IoU-based object localization), ESP32 and IoT sensing, model-integrity work on safety-critical ML (CleanSight), SQL/NoSQL databases, and publications."
+  ],
+  "gaps": [
+   "Results rest on a single held-out bus with 100% precision and 1.0 AUC. An interviewer will probe data leakage, how scenarios and faults were split, and whether the model generalizes to other topologies or fault types, especially with 992 features built from lags and rolling windows.",
+   "RL experience is in object detection and a greenhouse, not power systems. The JD wants RL prototypes for load shedding, so expect questions on state, action and reward design, safety constraints, and sim-to-real risk.",
+   "Education and timeline: the MS began in Winter 2026 with expected completion in Jan. 2028, against a 'near completion' requirement, and the Research Assistant role is listed as starting Sep. 2026 and running to 'Present'. Be ready to clarify dates, availability and how much of the work was independent versus advisor-guided."
+  ],
+  "jd_keywords": [
+   "MATLAB/Simulink",
+   "Python",
+   "PyTorch",
+   "scikit-learn",
+   "time-series",
+   "physics-informed features",
+   "early-warning models",
+   "recall and false-alarm rate",
+   "lead time",
+   "closed-loop simulation",
+   "reinforcement learning",
+   "hardware-in-the-loop"
+  ],
+  "questions": [
+   {
+    "q": "Tell me about yourself and what draws you to applying machine learning to DC microgrids and EV charging.",
+    "type": "intro",
+    "why": "Checks whether Naren can connect his research, IoT and ML background into a clear story for this role and show real motivation for power systems."
+   },
+   {
+    "q": "Walk me through your 10-bus DC grid project end to end, from the Simulink simulation to the trained early-warning model. Which design decisions mattered most?",
+    "type": "resume",
+    "why": "Tests ownership and depth on the most relevant project: pipeline design, simulation scenarios, feature choices and how he explains trade-offs."
+   },
+   {
+    "q": "You report 96% recall, 100% precision and 1.0 AUC on a held-out bus. How did you rule out leakage from your lag and rolling features, and how confident are you this generalizes to other buses or fault types?",
+    "type": "technical",
+    "why": "Probes evaluation rigor and experimental design: split strategy, leakage, small-sample risk, and honesty about the limits of near-perfect metrics."
+   },
+   {
+    "q": "Your reinforcement learning experience is in object localization and a greenhouse controller. How would you design the state, actions and reward for a load-shedding policy in a microgrid, and what safety constraints would you build in?",
+    "type": "gap",
+    "why": "Probes whether his RL experience transfers to the grid domain and whether he thinks about safety limits, reward design and sim-to-real risk."
+   },
+   {
+    "q": "In your CleanSight project you reached 100% detection accuracy across 14 ViT models. What would you check before trusting that result, and how does that mindset apply to a fault-prediction model in a safety-critical grid?",
+    "type": "technical",
+    "why": "Tests critical thinking about small-sample evaluation and links his model-integrity work to the robustness interest named in the job description."
+   },
+   {
+    "q": "Tell me about a time an experiment gave you unexpected or disappointing results. What did you do next, and how did you communicate it to your advisor or team?",
+    "type": "behavioral",
+    "why": "Assesses research habits, resilience, reproducibility and how he documents and presents findings to engineering and research teams."
+   }
+  ]
+ },
+ "answers": [
+  {
+   "q_idx": 0,
+   "attempt": 1,
+   "question": "Tell me about yourself and what draws you to applying machine learning to DC microgrids and EV charging.",
+   "qtype": "intro",
+   "duration": 34.7,
+   "behavior": {
+    "seconds": 34.75224629999866,
+    "face_visible_pct": 100.0,
+    "eye_contact_pct": 74.98102388855659,
+    "smile_pct": 0.0,
+    "tension_pct": 0.0,
+    "head_motion_dps": 13.993966865586712,
+    "lean_back_pct": 2.7162065779919096,
+    "too_close_pct": 0.0,
+    "blink_rate": 30.16055761723674,
+    "away_events": 0,
+    "longest_away_s": 0.0,
+    "ec_by_minute": [
+     74.98102388855659
+    ]
+   },
+   "status": "done",
+   "transcript": "Okay, so my name is Narayan Rakshith, and I'm a master student in the University of Michigan-Dearborn, so, what makes me to come to the great learning part is that I've always wanted to apply, like, automate the way how great works and to see whether the great collapses or not, like, I want to minimize the human impact on the grits, because working with grits are very dangerous, as it is high voltage and other stuff, so applying AI to a voltage and grits or DC grits can help, uh, human, like, it can reduce the human faith. and be helpful for the society as well, yeah, that's it.",
+   "lines": [
+    [
+     1.54,
+     "Okay, so my name is Narayan Rakshith, and I'm a master student in the University of Michigan-Dearborn, so, what makes me to come to the great learning part is that I've always wanted to apply, like, automate the way how great works and to see whether the great collapses or not, like, I want to minimize the human impact on the grits, because working with grits are very dangerous, as it is high voltage and other stuff, so applying AI to a voltage and grits or DC grits can help, uh, human, like, it can reduce the human faith."
+    ],
+    [
+     29.98,
+     "and be helpful for the society as well, yeah, that's it."
+    ]
+   ],
+   "speech": {
+    "duration": 34.7,
+    "words": 111,
+    "wpm": 208.64661654135335,
+    "latency": 1.54,
+    "fillers": 4,
+    "filler_per_min": 7.518796992481203,
+    "top_fillers": [
+     [
+      "like",
+      3
+     ],
+     [
+      "um/uh",
+      1
+     ]
+    ],
+    "hedges": 0,
+    "long_pauses": 0,
+    "longest_pause": 1.04,
+    "energy_cv": 0.4187183976173401
+   },
+   "eval": {
+    "score": 62,
+    "relevance": {
+     "verdict": "partly relevant",
+     "note": "Answer touches safety motivation but lacks concrete connection to DC microgrids, EV charging, or ML pipeline work shown in resume."
+    },
+    "scores": {
+     "relevance": 6,
+     "structure": 7,
+     "specificity": 4,
+     "confidence": 7,
+     "role_fit": 6
+    },
+    "strengths": [
+     "Strong safety-first motivation ('reduce human faith') resonates with safety-critical systems emphasis in job description.",
+     "Natural delivery: steady eye contact (75%), good pace (209 wpm), minimal filler (7.5/min), no verbal hedging."
+    ],
+    "improvements": [
+     "Replace vague 'great' references with specific technical work: mention your 10-bus DC grid project, 96% recall early-warning model, or voltage-collapse prediction.",
+     "Connect to the role explicitly: describe alternating MATLAB/Simulink simulation with Python ML pipeline\u2014this directly mirrors the job's 'pipelines from power-system simulations to ML training.'",
+     "Add one concrete outcome: e.g., 'validated load shedding in closed-loop simulation' or 'engineered physics-based features from grid signals.' This anchors motivation in deliverables."
+    ],
+    "missing_keywords": [
+     "DC microgrid",
+     "physics-informed features",
+     "early-warning models",
+     "closed-loop simulation",
+     "MATLAB/Simulink pipeline",
+     "voltage instability",
+     "feature engineering"
+    ],
+    "better_answer": "I'm Naren, a master's student at University of Michigan-Dearborn. What draws me to this role is my current research on AI-based thermal derating and load shedding for DC microgrids. I'm alternating MATLAB/Simulink electrical simulations with a Python ML pipeline\u2014exactly the bridge the role describes. I've engineered 992 physics-based features from grid signals and trained an early-warning detector that predicts bus voltage collapse 30 seconds in advance with 96% recall and zero false alarms. I'm motivated by safety: automating grid stability reduces human exposure to high-voltage hazards and makes renewable energy systems more reliable. The combination of rigorous simulation validation and ML rigor excites me."
+   },
+   "error": null
+  },
+  {
+   "q_idx": 1,
+   "attempt": 1,
+   "question": "Walk me through your 10-bus DC grid project end to end, from the Simulink simulation to the trained early-warning model. Which design decisions mattered most?",
+   "qtype": "resume",
+   "duration": 60.8,
+   "behavior": {
+    "seconds": 60.816124000000855,
+    "face_visible_pct": 100.0,
+    "eye_contact_pct": 58.366621161241646,
+    "smile_pct": 0.0,
+    "tension_pct": 0.0,
+    "head_motion_dps": 11.838137926329773,
+    "lean_back_pct": 0.0,
+    "too_close_pct": 0.0,
+    "blink_rate": 33.0,
+    "away_events": 1,
+    "longest_away_s": 2.4171261999981652,
+    "ec_by_minute": [
+     59.037316919041885,
+     8.002093503168803
+    ]
+   },
+   "status": "done",
+   "transcript": "Okay, the design decisions, like, which matter, the most was the 10 grid, like, first we wanted to go with the 10 grid topology, which is a circle 10 grid topology, so each, so it forms a total 10 grids, and, uh, why we chose that because it was that, uh, like, uh, when, uh, if the grid fails, the whole grid is gonna fail with that, so we chose that topology, and the second was the future engineering, like, extracting the engineering, like, the, uh, extracting the features from the, uh, numbers we got for training the ML model, uh, we did feature engineering and got about 10 grids. like 512 feature engineering features the datasets to generate a dataset. And we did this 512, they feature engineered data into and trained it, so it turned it into a dataset and the trained and neural network. So this neural network helps in predicting the like the collapse of the buses and other stuff. So it gives us an early warning. So we can just like we can just cut the power that the required bus. So we can help the grid from collapsing. Yeah, that's it.",
+   "lines": [
+    [
+     0.0,
+     "Okay, the design decisions, like, which matter, the most was the 10 grid, like, first we wanted to go with the 10 grid topology, which is a circle 10 grid topology, so each, so it forms a total 10 grids, and, uh, why we chose that because it was that, uh, like, uh, when, uh, if the grid fails, the whole grid is gonna fail with that, so we chose that topology, and the second was the future engineering, like, extracting the engineering, like, the, uh, extracting the features from the, uh, numbers we got for training the ML model, uh, we did feature engineering and got about 10 grids."
+    ],
+    [
+     29.98,
+     "like 512 feature engineering features the datasets to generate a dataset."
+    ],
+    [
+     36.04,
+     "And we did this 512, they feature engineered data into and trained it,"
+    ],
+    [
+     40.34,
+     "so it turned it into a dataset and the trained and neural network."
+    ],
+    [
+     45.0,
+     "So this neural network helps in predicting the like the collapse of the buses and other stuff."
+    ],
+    [
+     49.84,
+     "So it gives us an early warning."
+    ],
+    [
+     51.58,
+     "So we can just like we can just cut the power that the required bus."
+    ],
+    [
+     55.26,
+     "So we can help the grid from collapsing."
+    ],
+    [
+     57.72,
+     "Yeah, that's it."
+    ]
+   ],
+   "speech": {
+    "duration": 60.8,
+    "words": 197,
+    "wpm": 202.1203830369357,
+    "latency": 0.0,
+    "fillers": 15,
+    "filler_per_min": 15.389876880984954,
+    "top_fillers": [
+     [
+      "like",
+      8
+     ],
+     [
+      "um/uh",
+      7
+     ]
+    ],
+    "hedges": 0,
+    "long_pauses": 0,
+    "longest_pause": 1.0999999999999996,
+    "energy_cv": 0.44508257508277893
+   },
+   "eval": {
+    "score": 52,
+    "relevance": {
+     "verdict": "partly relevant",
+     "note": "Addresses topology and feature engineering but conflates numbers (512 vs 992 features), omits validation approach, lead time, and recall metrics that define success for this role."
+    },
+    "scores": {
+     "relevance": 6,
+     "structure": 5,
+     "specificity": 4,
+     "confidence": 5,
+     "role_fit": 5
+    },
+    "strengths": [
+     "Correctly identifies ring topology rationale and articulates why circuit-topology resilience matters for the grid.",
+     "Recognizes feature engineering as a critical design decision and attempts to explain the pipeline flow (simulation \u2192 features \u2192 model)."
+    ],
+    "improvements": [
+     "State the correct feature count: 992 physics-based features derived from 80 base signals (not 512). Precision matters for technical credibility.",
+     "Name the model architecture (MLP) and quantify success: 96% recall, 100% precision, 30-second lead time, 3x timing margin for load shedding.",
+     "Explain validation: held-out bus testing and closed-loop simulation confirmation before deployment\u2014these are core to safety-critical ML design."
+    ],
+    "missing_keywords": [
+     "closed-loop simulation validation",
+     "held-out test set",
+     "recall and precision trade-off",
+     "lead time",
+     "physics-informed features",
+     "early-warning model evaluation"
+    ],
+    "better_answer": "We chose a 10-bus ring topology because a single failure can propagate; that motivated our design. The critical decision was feature engineering: we extracted 992 physics-based features from 80 base signals\u2014grid-wide aggregates, ring-adjacent imbalances, lags, and rolling statistics\u2014to capture grid dynamics. We trained an MLP that achieved 96% recall, 100% precision, and a 30-second lead time, giving us a 3x safety margin before load shedding was needed. We validated everything in closed-loop simulation: all 10 buses survived after shedding the affected bus to 30% load. That validation step was essential\u2014it proved the model worked end-to-end in realistic conditions."
+   },
+   "error": null
+  }
+ ],
+ "overall_speech": {
+  "duration": 95.5,
+  "words": 308,
+  "wpm": 204.42477876106193,
+  "latency": 0.77,
+  "fillers": 19,
+  "filler_per_min": 12.610619469026547,
+  "top_fillers": [
+   [
+    "like",
+    11
+   ],
+   [
+    "um/uh",
+    8
+   ]
+  ],
+  "hedges": 0,
+  "long_pauses": 0,
+  "longest_pause": 1.0999999999999996,
+  "energy_cv": 0.4319004863500595
+ },
+ "overall_behavior": {
+  "face_visible_pct": 100.0,
+  "eye_contact_pct": 64.4082415623695,
+  "smile_pct": 0.0,
+  "tension_pct": 0.0,
+  "head_motion_dps": 12.622078240918588,
+  "lean_back_pct": 0.9877146560492499,
+  "too_close_pct": 0.0,
+  "blink_rate": 31.967472180066625,
+  "seconds": 95.56837029999951,
+  "away_events": 1,
+  "longest_away_s": 2.4171261999981652,
+  "ec_by_minute": [
+   74.98102388855659,
+   59.037316919041885,
+   8.002093503168803
+  ]
+ },
+ "review": {
+  "overall_score": 54,
+  "readiness": "Getting there",
+  "headline": "You have strong real work behind you (a 10-bus DC grid early-warning pipeline), but in these two answers it came across as vague and rushed, with a wrong feature count and few of the numbers that make the project credible.",
+  "content": {
+   "score": 5,
+   "summary": "Your motivation in Q1 (using AI so people face less danger around high-voltage grids) is genuine and relevant, but it stayed generic and never mentioned your actual project or results. In Q2 you gave the right skeleton (ring topology, feature engineering, neural network, early warning, cutting power to the affected bus), but you said '512 features' where your resume says 992 from 80 base signals. You also left out the MLP, the 96% recall, zero false alarms, 30-second lead time, and the held-out-bus and closed-loop validation, which are exactly what this role screens for. Your reason for the ring topology ('if the grid fails, the whole grid is gonna fail') was unclear."
+  },
+  "delivery": {
+   "score": 3,
+   "summary": "You spoke at about 204 words/min, well above the 120-165 target, with filler words at 12.6/min against a benchmark of under 3/min ('like' x11, um/uh x8). Fillers roughly doubled from Q1 (7.5/min) to Q2 (15.4/min) as the question got more technical, and several Q2 sentences restarted mid-thought ('the future engineering, like, extracting the engineering...'). Vocal variation was low (0.43), so key results would not stand out even if you stated them. On the positive side, you had no long pauses and no hedging."
+  },
+  "body_language": {
+   "score": 5,
+   "summary": "You stayed fully in frame and never sat too close. Eye contact was in a natural range for Q1 (75%) but dropped to 58% in Q2 with one look-away of about 2 seconds, a tendency to look away when searching for technical detail. The very low final-minute figure (8%) likely reflects a short closing segment, so it should not be over-read. Head motion averaged 12.6 deg/s, roughly double the ~6 deg/s that reads as steady, so you may be moving your head a lot while talking."
+  },
+  "strengths": [
+   "Your Q1 motivation is concrete and human: reducing people's exposure to dangerous high-voltage work and helping grids avoid collapse, which fits the role's mission.",
+   "In Q2 you described the correct end-to-end logic: topology choice, feature engineering, a neural network predicting bus collapse, and cutting power to the affected bus. This matches your resume and the core of the job.",
+   "You started promptly, stayed in frame, and had no hedging or long pauses, so the basics of presence are sound."
+  ],
+  "top_improvements": [
+   {
+    "title": "Anchor every answer in your real numbers and a clear structure",
+    "detail": "In Q2 you said '512 features' and 'neural network' where your resume says 992 physics-based features from 80 base signals and an MLP detector. You also omitted the results that prove it works: 96% recall, 100% precision (zero false alarms), 1.0 AUC on a held-out bus, 30-second lead time, and all 10 buses surviving after shedding the affected bus to 30% load. In Q1 you never named the project at all. Use a fixed order: problem, simulation setup, features, model, validation, result, and double-check exact figures, because a wrong number undermines technical credibility.",
+    "drill": "Write a 6-line card for the project (setup, 80 signals to 992 features, MLP, held-out bus plus closed-loop validation, 96% recall / 0 false alarms / 30 s lead, 10 of 10 buses survive). Then answer Q2 aloud in 90 seconds using only the card and check each figure against your resume."
+   },
+   {
+    "title": "Slow down and replace fillers with silent pauses",
+    "detail": "At 204 wpm with 19 fillers in 96 seconds, the listener has to work to catch your content, and several Q2 sentences restarted midway. Fillers doubled in Q2 when you were reaching for details, which suggests you don't yet have a rehearsed path through the material. Aim for about 150 wpm and treat a one-second pause as a tool for thinking, not a gap to fill.",
+    "drill": "Record the Q2 answer in three one-sentence chunks (topology, features, model and result). Pause for a full beat between chunks and replace every 'like' or 'um' with silence. Repeat three times and count fillers each time until you are under 3/min."
+   },
+   {
+    "title": "Tie your answer to the role and steady your on-camera habits",
+    "detail": "Q1 should connect you to this job: you already alternate MATLAB/Simulink simulation with a Python ML pipeline, which mirrors the posting. Mention that, plus one line on your early-warning focus (recall, false alarms, lead time). Eye contact dipped to 58% in Q2 and head motion was high, which tends to happen when you are searching for words; a clear structure should help both.",
+    "drill": "Write a 3-sentence opener: who you are (MS student, grid research), what you built (Simulink-to-Python early-warning pipeline with numbers), and why this role. Deliver it 3 times looking at the camera lens with your head still, then check a recording for steadiness."
+   }
+  ],
+  "jd_coverage": {
+   "covered": [
+    "Simulation-to-ML pipeline (Simulink data feeding a Python model)",
+    "Feature engineering from grid signals",
+    "Early-warning prediction of bus voltage collapse",
+    "Acting on predictions with load shedding",
+    "Motivation for safety-critical power systems"
+   ],
+   "missing": [
+    "Evaluation focus on recall, false-alarm rate and lead time (numbers not stated)",
+    "Closed-loop simulation validation before hardware testing (not explained)",
+    "Reinforcement learning and reward design experience",
+    "Embedded/IoT experience (ESP32)",
+    "Model robustness/integrity in safety-critical systems (CleanSight)",
+    "Research habits: reproducibility, documentation and publications"
+   ]
+  },
+  "practice_plan": [
+   "Build a one-page project card for the 10-bus grid with exact figures (80 signals to 992 features, MLP, 96% recall, 0 false alarms, 30 s lead, 10/10 buses survive) and memorize it.",
+   "Re-record Q1 and Q2 at about 150 wpm, using silent pauses instead of fillers, and compare filler counts and pace with this session.",
+   "Prepare short 60-second stories for RL reward design, ESP32 closed-loop sensing, and CleanSight model integrity, so you can link them to the job's preferred qualifications."
+  ],
+  "qa_breakdown": []
+ },
+ "review_error": null,
+ "prev_score": null
+}

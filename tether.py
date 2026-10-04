@@ -184,16 +184,14 @@ def extract_features(res, mic_level):
               (g("eyeLookInRight", 0) - g("eyeLookOutRight", 0))) / 2
     gaze_v = ((g("eyeLookUpLeft", 0) - g("eyeLookDownLeft", 0)) +
               (g("eyeLookUpRight", 0) - g("eyeLookDownRight", 0))) / 2
-    # interview-coach extras: smile, brow tension, face size (lean/distance proxy)
-    smile = (g("mouthSmileLeft", 0) + g("mouthSmileRight", 0)) / 2
-    brow = max((g("browDownLeft", 0) + g("browDownRight", 0)) / 2,
-               g("browInnerUp", 0))
     lm = res.face_landmarks[0]
-    face_w = abs(lm[454].x - lm[234].x)          # temple to temple, 0-1 of frame
     return Features(
         face=True, yaw=yaw, pitch=pitch, gaze_h=gaze_h, gaze_v=gaze_v,
         blink=(g("eyeBlinkLeft", 0) + g("eyeBlinkRight", 0)) / 2,
-        jaw=g("jawOpen", 0), mic=mic_level, smile=smile, brow=brow, face_w=face_w,
+        jaw=g("jawOpen", 0), mic=mic_level,
+        smile=(g("mouthSmileLeft", 0) + g("mouthSmileRight", 0)) / 2,
+        brow=(g("browDownLeft", 0) + g("browDownRight", 0)) / 2,
+        face_w=abs(lm[454].x - lm[234].x),
     )
 
 

@@ -1,0 +1,197 @@
+{
+ "version": 2,
+ "created": "2026-10-03T21:34:06",
+ "role": "SOC Analyst",
+ "mode": "live",
+ "separated": false,
+ "brief": null,
+ "answers": [
+  {
+   "q_idx": 0,
+   "attempt": 1,
+   "question": "Live interview",
+   "qtype": "live",
+   "duration": 78.9,
+   "behavior": {
+    "seconds": 78.88647000000142,
+    "face_visible_pct": 100.0,
+    "eye_contact_pct": 42.35554183121057,
+    "smile_pct": 17.43221708361797,
+    "tension_pct": 0.21573813608540562,
+    "head_motion_dps": 5.613539378882513,
+    "lean_back_pct": 0.0,
+    "too_close_pct": 8.05052653514577,
+    "blink_rate": 22.0,
+    "away_events": 4,
+    "longest_away_s": 3.852638799999113,
+    "ec_by_minute": [
+     45.26716901218006,
+     33.10146578702952
+    ]
+   },
+   "transcript": "I'm Akash, I'm a cyber security graduate at UNS term Michigan day one. I used to work as a SOC, I'm just back in India. After coming here, I'm just doing some projects related to cyber security and AI. Yeah, that will be it. That's about myself. So, yeah, one of my publication is a phishing website detection using this in machine learning. So, where I used machine learning to extract the IOCs from the URLs and will classify it in our data set and after that will block the phishing URLs based on the IOCs also like we useful one. Yeah, but that's it.",
+   "lines": [
+    [
+     8.66,
+     "I'm Akash, I'm a cyber security graduate at UNS term Michigan day one."
+    ],
+    [
+     14.16,
+     "I used to work as a SOC, I'm just back in India."
+    ],
+    [
+     18.5,
+     "After coming here, I'm just doing some projects related to cyber security and AI."
+    ],
+    [
+     26.44,
+     "Yeah, that will be it. That's about myself."
+    ],
+    [
+     29.22,
+     "So, yeah, one of my publication is a phishing website detection using this in machine learning."
+    ],
+    [
+     45.72,
+     "So, where I used machine learning to extract the IOCs from the URLs and will classify it"
+    ],
+    [
+     52.3,
+     "in our data set and after that will block the phishing URLs based on the IOCs also like we"
+    ],
+    [
+     67.58,
+     "useful one. Yeah, but that's it."
+    ]
+   ],
+   "speech": {
+    "duration": 78.9,
+    "words": 105,
+    "wpm": 99.19697685403872,
+    "latency": 8.66,
+    "fillers": 1,
+    "filler_per_min": 0.944733112895607,
+    "top_fillers": [
+     [
+      "like",
+      1
+     ]
+    ],
+    "hedges": 0,
+    "long_pauses": 4,
+    "longest_pause": 8.560000000000002,
+    "energy_cv": 0.4226909875869751
+   },
+   "eval": null,
+   "status": "done",
+   "error": null,
+   "t_start": 0.0
+  }
+ ],
+ "dialogue": null,
+ "overall_speech": {
+  "duration": 78.9,
+  "words": 105,
+  "wpm": 99.19697685403871,
+  "latency": 8.66,
+  "fillers": 1,
+  "filler_per_min": 0.9447331128956068,
+  "top_fillers": [
+   [
+    "like",
+    1
+   ]
+  ],
+  "hedges": 0,
+  "long_pauses": 4,
+  "longest_pause": 8.560000000000002,
+  "energy_cv": 0.4226909875869751
+ },
+ "overall_behavior": {
+  "face_visible_pct": 100.0,
+  "eye_contact_pct": 42.35554183121057,
+  "smile_pct": 17.43221708361797,
+  "tension_pct": 0.21573813608540562,
+  "head_motion_dps": 5.613539378882513,
+  "lean_back_pct": 0.0,
+  "too_close_pct": 8.05052653514577,
+  "blink_rate": 22.0,
+  "seconds": 78.88647000000142,
+  "away_events": 4,
+  "longest_away_s": 3.852638799999113,
+  "ec_by_minute": [
+   45.26716901218006,
+   33.10146578702952
+  ]
+ },
+ "review": {
+  "overall_score": 38,
+  "readiness": "Not yet",
+  "headline": "You named a relevant project, but the answer was short, trailed off without a conclusion, and said little about your SOC experience, which is what this role requires.",
+  "content": {
+   "score": 4,
+   "summary": "The only question visible is a 'tell me about yourself' prompt. Your answer covered your education, a brief mention of SOC work in India, and the phishing detection publication. The SOC claim ('I used to work as a SOC') was vague, with no tools, alert types, volumes or outcomes, even though the role requires 2+ years as a SOC analyst. The phishing project explanation (extracting IOCs from URLs, classifying them, blocking) was the clearest part, but it ended with 'a useful one. Yeah, but that's it' and no link to the job."
+  },
+  "delivery": {
+   "score": 4,
+   "summary": "At 99 wpm you were well below the 120-165 range, and there were 4 long pauses (longest 8.6s) plus a first word after 8.7s, so you came across as hesitant. Filler words were low (1 in total), which is good. Some phrases were garbled or unfinished ('UNS term Michigan day one', 'also like we... useful one'), and the vocal variation of 0.42 suggests a fairly flat tone."
+  },
+  "body_language": {
+   "score": 5,
+   "summary": "Eye contact was about 42% (45% then 33%), below the natural 55-80% range and dropping in the second half, and you looked away for 2s+ four times, longest 4s. You stayed in frame the whole time and head motion was steady at 5.6 deg/s. You were too close to the camera about 8% of the time, and smiling was limited at 17%, which can read as reserved."
+  },
+  "strengths": [
+   "You picked a relevant, concrete project: using machine learning to extract IOCs from URLs and block phishing sites matches SOC threat-detection work.",
+   "Your head movement was steady and you stayed fully in frame, which looks composed.",
+   "Filler words were minimal (1 'like'), so your speech was not cluttered with verbal crutches."
+  ],
+  "top_improvements": [
+   {
+    "title": "Turn the vague SOC mention into specific proof",
+    "detail": "You said 'I used to work as a SOC, I'm just back in India' with no detail. The job asks for 2+ years as a SOC analyst, so this is the most important claim to back up. Your resume shows Splunk, Microsoft Defender, KQL/SPL, Azure Logic Apps SOAR and MITRE ATT&CK, but none of these came up. Name the tools, the kinds of alerts you triaged, and one result (for example, the resume's claim of 40% less manual triage or 25% lower MTTR, if accurate and you can explain it).",
+    "drill": "Write a 3-sentence SOC statement: where/when you did it, tools you used, one measurable outcome. Say it aloud five times until it takes about 20 seconds without pausing."
+   },
+   {
+    "title": "Use a structured 60-90 second intro with a clear ending",
+    "detail": "Your answer lasted about 79s but was fragmented: education, then India, then projects, then publication, then it trailed off ('Yeah, that's it'). Use a present-past-future structure: who you are now (MS in Cybersecurity), what you've done (SOC work, Splunk lab, phishing detection publication), and why this SOC Analyst role is the next step. End with a deliberate closing line rather than 'that's it'.",
+    "drill": "Record yourself giving the intro in three parts, each 20-30 seconds, using bullet notes. Replay and check it ends on a sentence about the role, not a fade-out."
+   },
+   {
+    "title": "Fix pace, opening delay and eye contact",
+    "detail": "Your first word came after 8.7s, your pace was 99 wpm, and you had a pause of 8.6s, which makes you sound unsure even when the content is good. Eye contact fell from 45% to 33% in the second minute, probably when you were searching for words. Start within 2-3 seconds, speak at a steadier pace, and look at the camera lens when you finish a point.",
+    "drill": "Do five 30-second answers to random prompts, starting within 3 seconds each time. Put a sticky note next to the lens and glance at it at the end of each sentence. Aim for about 130 wpm."
+   }
+  ],
+  "jd_coverage": {
+   "covered": [
+    "Threat detection / IOC analysis (phishing project)",
+    "Machine learning and automation mindset (Python-based work, in the project)"
+   ],
+   "missing": [
+    "SIEM triage and investigation (Splunk, KQL/SPL) was on your resume but not mentioned",
+    "SOAR configuration (Azure Logic Apps)",
+    "Incident escalation and communicating event history and impact to management",
+    "Cloud experience (Azure/AWS)",
+    "Knowledge of internet protocols (TCP/IP, DNS) and MITRE ATT&CK",
+    "Teamwork in a fast-paced environment and customer-service orientation",
+    "Certifications (Security+ in progress) and the 2+ years SOC requirement"
+   ]
+  },
+  "practice_plan": [
+   "Draft and rehearse a 75-second intro covering present, past (specific SOC experience with tools and one metric) and future (why this role), then record and review it.",
+   "Prepare three STAR stories from your resume: triaging an alert in Splunk or Defender, building the Azure Logic Apps SOAR workflow, and explaining a PCAP analysis that reduced false positives. Be ready to explain the numbers.",
+   "Practise a mock interview with a friend or on video, focusing on starting within 3 seconds, keeping pace near 130 wpm, and looking at the camera when you wrap up each point."
+  ],
+  "qa_breakdown": [
+   {
+    "question": "Tell me about yourself (inferred intro question)",
+    "rating": 4,
+    "feedback": "You gave your name, your Master's at Michigan, a brief mention of past SOC work in India, current cybersecurity/AI projects, and the phishing detection publication. The phishing description (ML to extract IOCs from URLs, classify, block) was relevant, but the SOC experience had no detail and the ending ('a useful one. Yeah, but that's it') was weak. Add specific tools, a result, and a closing line tying you to this role."
+   }
+  ]
+ },
+ "review_error": null,
+ "prev_score": null,
+ "audio_note": "Call audio not available on this computer (mic only). Reason: No module named 'soundcard'",
+ "camera_note": "Camera: analysing body language"
+}

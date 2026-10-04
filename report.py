@@ -6,8 +6,8 @@
     python report.py --demo           # build a realistic sample session (backup demo!)
     python report.py --offline        # never call the AI coach
 
-AI coach: set ANTHROPIC_API_KEY (and `pip install anthropic`) to get a written
-coaching note from Claude. Only aggregated numbers and app names are sent -
+AI coach: set GEMINI_API_KEY (and `pip install google-genai`) to get a written
+coaching note from Gemini. Only aggregated numbers and app names are sent -
 never video, audio or window titles. Without a key, a local rule-based coach
 writes the note, so the report always works offline.
 """
@@ -192,15 +192,12 @@ def summary_for_ai(a):
 
 
 def ai_coach(a, offline=False):
-    if offline or not os.environ.get("ANTHROPIC_API_KEY"):
+    import llm
+    if offline or not llm.has_key():
         return None
     try:
-        import anthropic
-        msg = anthropic.Anthropic().messages.create(
-            model=os.environ.get("TETHER_MODEL", "claude-sonnet-5-5"), max_tokens=700,
-            messages=[{"role": "user", "content": PROMPT + json.dumps(summary_for_ai(a))}])
-        text = "".join(b.text for b in msg.content if getattr(b, "type", "") == "text").strip()
-        return text or None
+        return llm.generate_text("You are a concise, kind focus coach.",
+                                 PROMPT + json.dumps(summary_for_ai(a)), max_tokens=700) or None
     except Exception as e:
         print(f"[WARN] AI coach unavailable ({e}); using the local coach.")
         return None
@@ -363,7 +360,7 @@ def build_html(a, coach_text, source):
     drift_html = (f'<h2>Drift episodes</h2><div class="scroll"><table><tr><th>Started</th><th>Lasted</th>'
                   f'<th>App when it began</th></tr>{drift_rows}</table></div>') if drift_rows else ""
 
-    badge = ("Written by Claude from your aggregated session numbers" if source == "ai"
+    badge = ("Written by Gemini from your aggregated session numbers" if source == "ai"
              else "Written by Tether's local coach (offline)")
     return f"""<!doctype html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">

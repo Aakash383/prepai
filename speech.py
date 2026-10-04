@@ -75,19 +75,21 @@ class Transcriber:
         finally:
             self.ready.set()
 
-    def transcribe(self, audio):
+    def transcribe(self, audio, vad=False):
         self.ready.wait()
         if self.model is None:
             raise RuntimeError(f"Speech model unavailable: {self.error}")
+        extra = dict(vad_filter=True, vad_parameters=dict(min_silence_duration_ms=600)) if vad else {}
         segs, _ = self.model.transcribe(
             audio, language="en", word_timestamps=True, beam_size=3,
-            condition_on_previous_text=False, initial_prompt=WHISPER_PROMPT)
-        words, lines = [], []
+            condition_on_previous_text=False, initial_prompt=None if vad else WHISPER_PROMPT, **extra)
+        words, lines, spans = [], [], []
         for s in segs:
             lines.append((float(s.start), s.text.strip()))
+            spans.append((float(s.start), float(s.end), s.text.strip()))
             for w in (s.words or []):
                 words.append((w.word.strip(), float(w.start), float(w.end)))
-        return dict(text=" ".join(t for _, t in lines).strip(), lines=lines, words=words)
+        return dict(text=" ".join(t for _, t in lines).strip(), lines=lines, words=words, segs=spans)
 
 
 def analyze_speech(tr, audio):

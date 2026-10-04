@@ -1,0 +1,457 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PrepAI · AI Interview Coach</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#070a12;--card:rgba(255,255,255,.045);--card2:rgba(255,255,255,.075);--line:rgba(255,255,255,.1);
+--ink:#eef2fb;--mute:#97a3bd;--dim:#66728c;--good:#34d399;--mid:#fbbf24;--bad:#fb7185;
+--acc:#7c9cff;--acc2:#b388ff;--acc3:#38e1ff;--grad:linear-gradient(135deg,#7c9cff,#b388ff 55%,#ff8fd8)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,"Segoe UI",system-ui,sans-serif;line-height:1.55;
+-webkit-font-smoothing:antialiased;overflow-x:hidden}
+button,input,textarea{font:inherit;color:inherit}
+.aurora{position:fixed;inset:0;z-index:-2;overflow:hidden;background:radial-gradient(1200px 700px at 85% -10%,#151d3d,transparent 60%),var(--bg)}
+.aurora i{position:absolute;border-radius:50%;filter:blur(100px);animation:drift 22s ease-in-out infinite}
+.aurora i:nth-child(1){width:560px;height:560px;background:#4f46e5;left:-160px;top:-120px;opacity:.5}
+.aurora i:nth-child(2){width:480px;height:480px;background:#0ea5e9;right:-120px;top:30%;opacity:.28;animation-delay:-7s}
+.aurora i:nth-child(3){width:560px;height:560px;background:#c026d3;left:20%;bottom:-260px;opacity:.26;animation-delay:-13s}
+@keyframes drift{50%{transform:translate(50px,-40px) scale(1.1)}}
+.grid{position:fixed;inset:0;z-index:-1;pointer-events:none;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
+background-size:60px 60px;mask-image:radial-gradient(ellipse at 50% 0,#000,transparent 72%);opacity:.3}
+/* nav */
+nav{position:sticky;top:0;z-index:30;display:flex;align-items:center;gap:12px;padding:14px max(24px,calc((100vw - 1180px)/2));
+backdrop-filter:blur(18px);background:rgba(7,10,18,.6);border-bottom:1px solid var(--line)}
+.brand{display:flex;align-items:center;gap:11px;font-family:Sora,Inter,sans-serif;font-weight:800;font-size:1.15rem;letter-spacing:.2px}
+.logo{width:34px;height:34px;border-radius:11px;background:var(--grad);display:grid;place-items:center;box-shadow:0 8px 30px rgba(124,156,255,.5)}
+.logo svg{width:19px;height:19px}.sp{flex:1}
+.chip{display:inline-flex;align-items:center;gap:8px;padding:7px 14px;border-radius:99px;border:1px solid var(--line);background:var(--card);font-size:.84rem;cursor:pointer;transition:.2s;color:var(--ink)}
+.chip:hover{background:var(--card2);transform:translateY(-1px)}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--mid);box-shadow:0 0 10px currentColor;color:var(--mid)}
+.dot.ok{background:var(--good);color:var(--good)}
+a.link{color:var(--mute);text-decoration:none;font-size:.9rem;padding:7px 12px;border-radius:10px;transition:.2s}a.link:hover{color:#fff;background:var(--card)}
+main{max-width:1180px;margin:0 auto;padding:0 24px 90px}
+/* buttons */
+.btn{position:relative;overflow:hidden;cursor:pointer;border:1px solid var(--line);background:var(--card);padding:11px 20px;border-radius:13px;font-weight:600;font-size:.92rem;transition:.25s}
+.btn:hover{background:var(--card2);transform:translateY(-2px)}.btn:active{transform:none}
+a.btn{text-decoration:none;display:inline-block;color:var(--ink)}
+.btn.primary,a.btn.primary{background:var(--grad);border:0;color:#0a0e1c;box-shadow:0 14px 40px -10px rgba(124,156,255,.7)}
+.btn.primary:hover{box-shadow:0 18px 50px -8px rgba(179,136,255,.85);filter:brightness(1.07)}
+.btn.big{padding:16px 30px;font-size:1.02rem;border-radius:16px}
+.btn.stop{background:linear-gradient(135deg,#fb7185,#f43f5e);border:0;color:#fff;box-shadow:0 14px 40px -10px rgba(244,63,94,.7)}
+.btn[disabled]{opacity:.4;pointer-events:none}
+.ripple{position:absolute;border-radius:50%;background:rgba(255,255,255,.45);transform:scale(0);animation:rip .6s linear;pointer-events:none}
+@keyframes rip{to{transform:scale(4);opacity:0}}
+/* hero */
+.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:30px;align-items:center;padding:70px 0 40px;min-height:640px}
+.eyebrow{display:inline-flex;align-items:center;gap:9px;padding:7px 15px;border-radius:99px;border:1px solid rgba(124,156,255,.35);background:rgba(124,156,255,.1);
+font-size:.84rem;font-weight:600;color:#cfd9ff}
+.eyebrow svg{width:15px;height:15px}
+h1{font-family:Sora,Inter,sans-serif;font-size:clamp(2.6rem,5.6vw,4.5rem);line-height:1.04;letter-spacing:-2px;margin:22px 0 20px;font-weight:800}
+h1 em{font-style:normal;background:linear-gradient(100deg,#7c9cff,#b388ff,#ff8fd8,#38e1ff,#7c9cff);background-size:300% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shine 8s linear infinite}
+@keyframes shine{to{background-position:300% 0}}
+.lead{font-size:1.15rem;color:var(--mute);max-width:52ch;margin:0 0 30px}
+.cta{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+.trust{display:flex;gap:22px;flex-wrap:wrap;margin-top:34px;color:var(--dim);font-size:.84rem}
+.trust span{display:flex;align-items:center;gap:8px}.trust b{color:var(--mute);font-weight:600}
+.stage{position:relative;height:520px;display:grid;place-items:center}
+.orb{position:relative;width:330px;height:330px}
+.orb .core{position:absolute;inset:44px;border-radius:50%;background:conic-gradient(from 0deg,#7c9cff,#b388ff,#ff8fd8,#38e1ff,#7c9cff);animation:spin 9s linear infinite;box-shadow:0 0 140px rgba(124,156,255,.55)}
+.orb .core:after{content:"";position:absolute;inset:12px;border-radius:50%;background:radial-gradient(circle at 30% 25%,#1b2547,#080b16 70%)}
+.orb .r{position:absolute;inset:0;border-radius:50%;border:1px solid rgba(124,156,255,.4);animation:ping 4.5s ease-out infinite}
+.orb .r:nth-child(2){animation-delay:1.5s}.orb .r:nth-child(3){animation-delay:3s}
+@keyframes ping{from{transform:scale(.55);opacity:.9}to{transform:scale(1.35);opacity:0}}
+@keyframes spin{to{transform:rotate(360deg)}}
+.eq{position:absolute;inset:0;display:flex;gap:7px;align-items:center;justify-content:center;z-index:2}
+.eq i{width:7px;height:70px;border-radius:9px;background:linear-gradient(180deg,#38e1ff,#b388ff);animation:eq 1.2s ease-in-out infinite;transform-origin:center}
+.eq i:nth-child(2n){animation-duration:.9s}.eq i:nth-child(3n){animation-duration:1.5s}
+.eq i:nth-child(1){animation-delay:-.2s}.eq i:nth-child(2){animation-delay:-.5s}.eq i:nth-child(3){animation-delay:-.9s}.eq i:nth-child(4){animation-delay:-.1s}
+.eq i:nth-child(5){animation-delay:-.7s}.eq i:nth-child(6){animation-delay:-.4s}.eq i:nth-child(7){animation-delay:-.8s}
+@keyframes eq{0%,100%{transform:scaleY(.18)}50%{transform:scaleY(1)}}
+.fc{position:absolute;padding:13px 16px;border-radius:16px;background:rgba(14,19,36,.78);border:1px solid var(--line);backdrop-filter:blur(14px);
+box-shadow:0 24px 50px -20px rgba(0,0,0,.8);animation:bob 6s ease-in-out infinite;min-width:150px}
+.fc small{display:block;color:var(--mute);font-size:.74rem;letter-spacing:.06em;text-transform:uppercase}
+.fc b{font-size:1.5rem;font-weight:800;letter-spacing:-.5px}.fc b .u{font-size:.8rem;color:var(--dim);font-weight:500}
+.fc .bar{height:5px;border-radius:9px;background:rgba(255,255,255,.1);margin-top:8px;overflow:hidden}.fc .bar i{display:block;height:100%;border-radius:9px;background:var(--grad)}
+.fc.a{left:-6px;top:30px}.fc.b{right:-10px;top:96px;animation-delay:-2s}.fc.c{left:10px;bottom:42px;animation-delay:-4s}.fc.d{right:6px;bottom:8px;animation-delay:-1s}
+@keyframes bob{50%{transform:translateY(-14px)}}
+/* sections */
+.sec-h{display:flex;align-items:end;gap:16px;margin:0 0 22px}
+.sec-h h2{font-family:Sora,Inter,sans-serif;font-size:1.9rem;letter-spacing:-.8px;margin:0}.sec-h p{margin:0;color:var(--mute)}
+section{margin-top:56px;scroll-margin-top:90px}
+.glass{position:relative;background:var(--card);border:1px solid var(--line);border-radius:24px;backdrop-filter:blur(16px);
+box-shadow:0 30px 70px -35px rgba(0,0,0,.85),inset 0 1px 0 rgba(255,255,255,.06);overflow:hidden}
+.glass:before{content:"";position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .3s;
+background:radial-gradient(420px circle at var(--mx,50%) var(--my,50%),rgba(124,156,255,.16),transparent 60%)}
+.glass:hover:before{opacity:1}
+/* wizard */
+.wiz{padding:34px;display:grid;grid-template-columns:240px 1fr;gap:36px}
+.steps{position:relative;display:flex;flex-direction:column;gap:26px}
+.steps:before{content:"";position:absolute;left:19px;top:20px;bottom:20px;width:2px;background:var(--line)}
+.stp{position:relative;display:flex;gap:14px;align-items:center;color:var(--dim);font-weight:600;transition:.3s}
+.stp .n{position:relative;z-index:1;width:40px;height:40px;border-radius:13px;display:grid;place-items:center;background:#0d1224;border:1px solid var(--line);font-weight:800;transition:.35s}
+.stp small{display:block;font-weight:500;font-size:.78rem;color:var(--dim)}
+.stp.on{color:var(--ink)}.stp.on .n{border-color:var(--acc);box-shadow:0 0 0 4px rgba(124,156,255,.15)}
+.stp.done .n{background:var(--good);border-color:var(--good);color:#04130c}.stp.done{color:var(--ink)}
+.form{display:flex;flex-direction:column;gap:26px;min-width:0}
+label.l{display:block;font-weight:700;font-size:.92rem;margin-bottom:8px}
+label.l span{color:var(--dim);font-weight:500;margin-left:6px}
+.drop{border:2px dashed rgba(255,255,255,.18);border-radius:18px;padding:26px;text-align:center;cursor:pointer;transition:.25s;background:rgba(255,255,255,.02);position:relative}
+.drop:hover,.drop.over{border-color:var(--acc);background:rgba(124,156,255,.08);transform:scale(1.005)}
+.drop .ic{width:46px;height:46px;margin:0 auto 10px;border-radius:14px;background:rgba(124,156,255,.14);display:grid;place-items:center}
+.drop .ic svg{width:22px;height:22px}.drop p{margin:0;color:var(--mute);font-size:.92rem}.drop p b{color:var(--ink)}
+.drop.has{border-style:solid;border-color:rgba(52,211,153,.5);background:rgba(52,211,153,.06);display:flex;gap:14px;align-items:center;text-align:left;padding:18px 20px}
+.drop.has .ic{margin:0;background:rgba(52,211,153,.18)}.drop.has .x{margin-left:auto;color:var(--mute);font-size:.84rem;text-decoration:underline}
+.drop.busy{opacity:.7;pointer-events:none}
+.inp{width:100%;background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:14px;padding:13px 16px;outline:none;transition:.2s}
+.inp:focus{border-color:var(--acc);box-shadow:0 0 0 4px rgba(124,156,255,.15);background:rgba(255,255,255,.06)}
+textarea.inp{min-height:150px;resize:vertical;line-height:1.5}
+.sug{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.sug button{cursor:pointer;border:1px solid var(--line);background:var(--card);color:var(--mute);padding:5px 12px;border-radius:99px;font-size:.8rem;transition:.2s}
+.sug button:hover{color:#fff;border-color:var(--acc);background:rgba(124,156,255,.12)}
+.count{display:flex;justify-content:space-between;color:var(--dim);font-size:.78rem;margin-top:6px}.count .ok{color:var(--good)}
+.shake{animation:shake .45s;border-color:var(--bad)!important}@keyframes shake{20%,60%{transform:translateX(-7px)}40%,80%{transform:translateX(7px)}}
+.modes{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.mode{position:relative;text-align:left;cursor:pointer;padding:22px;border-radius:20px;background:rgba(255,255,255,.03);border:1.5px solid var(--line);transition:transform .25s,border-color .25s,background .25s;transform-style:preserve-3d;overflow:hidden}
+.mode:hover{background:rgba(255,255,255,.06)}
+.mode.sel{border-color:var(--acc);background:linear-gradient(145deg,rgba(124,156,255,.16),rgba(179,136,255,.1));box-shadow:0 20px 50px -20px rgba(124,156,255,.6)}
+.mode .mi{width:48px;height:48px;border-radius:15px;display:grid;place-items:center;margin-bottom:14px;background:var(--grad)}.mode .mi svg{width:24px;height:24px}
+.mode.live .mi{background:linear-gradient(135deg,#fb7185,#f59e0b)}
+.mode h3{margin:0 0 6px;font-size:1.12rem}.mode p{margin:0;color:var(--mute);font-size:.88rem}
+.mode ul{list-style:none;padding:0;margin:12px 0 0;display:grid;gap:5px;font-size:.82rem;color:#b9c3dc}.mode li:before{content:"\2713";color:var(--good);margin-right:8px;font-weight:800}
+.mode .tick{position:absolute;top:16px;right:16px;width:24px;height:24px;border-radius:50%;border:2px solid var(--dim);display:grid;place-items:center;transition:.25s}
+.mode.sel .tick{background:var(--acc);border-color:var(--acc)}.mode.sel .tick:after{content:"\2713";color:#0a0e1c;font-weight:900;font-size:.8rem}
+.go{display:flex;align-items:center;gap:16px;flex-wrap:wrap}.go small{color:var(--dim)}
+/* features */
+.feat{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.ft{padding:24px}.ft .fi{width:46px;height:46px;border-radius:14px;display:grid;place-items:center;margin-bottom:16px;background:rgba(124,156,255,.14);border:1px solid rgba(124,156,255,.3)}
+.ft .fi svg{width:22px;height:22px}.ft h3{margin:0 0 6px;font-size:1.02rem}.ft p{margin:0;color:var(--mute);font-size:.88rem}
+/* history */
+.hist{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
+.hc{padding:20px;display:flex;gap:16px;align-items:center;cursor:pointer;text-decoration:none;color:inherit;transition:transform .25s}
+.hc:hover{transform:translateY(-4px)}
+.mring{position:relative;width:70px;height:70px;flex:0 0 auto}.mring svg{transform:rotate(-90deg)}.mring b{position:absolute;inset:0;display:grid;place-items:center;font-size:1.2rem;font-weight:800}
+.hc h4{margin:0 0 2px;font-size:.98rem}.hc small{color:var(--mute);font-size:.78rem;display:block}
+.tag{display:inline-block;margin-top:6px;padding:2px 10px;border-radius:99px;font-size:.72rem;font-weight:700;border:1px solid var(--line);color:var(--mute)}
+.tag.live{color:#fda4af;border-color:rgba(251,113,133,.4)}
+.empty{padding:40px;text-align:center;color:var(--mute)}
+.trend{padding:22px 26px;margin-bottom:16px;display:flex;gap:26px;align-items:center;flex-wrap:wrap}.trend svg{flex:1;min-width:220px;height:70px}
+.trend b{font-size:1.8rem;letter-spacing:-1px;font-weight:800}.trend span{color:var(--mute);font-size:.82rem;display:block}
+/* overlays */
+.ov{position:fixed;inset:0;z-index:50;background:rgba(5,7,13,.86);backdrop-filter:blur(22px);display:none;overflow:auto;padding:40px 24px}
+.ov.open{display:block;animation:fade .35s}@keyframes fade{from{opacity:0}}
+.ovin{max-width:1000px;margin:0 auto}
+.ovh{display:flex;align-items:center;gap:14px;margin-bottom:24px}.ovh h2{font-family:Sora,Inter,sans-serif;margin:0;font-size:1.8rem;letter-spacing:-.8px}
+.livegrid{display:grid;grid-template-columns:1fr 1.15fr;gap:20px}
+.tips{padding:26px;display:flex;flex-direction:column;gap:18px}.tip{display:flex;gap:14px;font-size:.92rem;color:#c5cee3}
+.tip i{flex:0 0 auto;width:28px;height:28px;border-radius:9px;background:rgba(124,156,255,.16);color:var(--acc);display:grid;place-items:center;font-style:normal;font-weight:800;font-size:.82rem}
+.panel{padding:30px}
+.pill{display:inline-flex;align-items:center;gap:9px;padding:7px 16px;border-radius:99px;font-weight:700;font-size:.88rem;border:1px solid var(--line);background:var(--card)}
+.pill .dot{animation:pulse 1.6s infinite}@keyframes pulse{50%{opacity:.35}}
+.pill.rec{color:var(--bad);border-color:rgba(251,113,133,.5);background:rgba(251,113,133,.1)}.pill.rec .dot{background:var(--bad);color:var(--bad)}
+.pill.cal{color:var(--mid);border-color:rgba(251,191,36,.45)}.pill.proc{color:var(--acc3);border-color:rgba(56,225,255,.45)}.pill.done{color:var(--good);border-color:rgba(52,211,153,.5)}
+.timer{font-family:Sora,Inter,sans-serif;font-size:5.4rem;font-weight:800;letter-spacing:-3px;line-height:1;margin:18px 0 22px;font-variant-numeric:tabular-nums}
+.timer.rec{text-shadow:0 0 50px rgba(251,113,133,.55)}
+.meter{display:flex;align-items:center;gap:14px;margin:10px 0;color:var(--mute);font-size:.84rem}.meter span{width:126px;flex:0 0 auto}
+.segs{flex:1;display:flex;gap:3px;height:22px;align-items:flex-end}.segs i{flex:1;border-radius:3px;background:rgba(255,255,255,.08);height:30%;transition:height .12s,background .12s}
+.segs i.on{background:linear-gradient(180deg,#38e1ff,#7c9cff)}.segs i.hot{background:linear-gradient(180deg,#fbbf24,#fb7185)}
+.note{color:var(--dim);font-size:.82rem;margin:8px 0 0}
+.sw{display:flex;gap:12px;align-items:flex-start;padding:12px 14px;border-radius:14px;border:1px solid var(--line);background:var(--card);cursor:pointer;margin-top:12px;font-size:.88rem;color:#c5cee3}
+.sw input{appearance:none;flex:0 0 auto;width:22px;height:22px;border-radius:7px;border:2px solid var(--dim);cursor:pointer;display:grid;place-items:center;margin-top:1px}
+.sw input:checked{background:var(--good);border-color:var(--good)}.sw input:checked:after{content:"\2713";color:#04130c;font-weight:900;font-size:.82rem}
+.btns{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}
+.kbd{display:inline-grid;place-items:center;min-width:44px;height:44px;padding:0 12px;border-radius:12px;background:linear-gradient(180deg,#232b47,#161c33);border:1px solid var(--line);border-bottom-width:4px;font-weight:800;box-shadow:0 8px 20px -8px #000}
+.keys{display:flex;gap:26px;flex-wrap:wrap;justify-content:center;margin:26px 0}.keys div{display:flex;flex-direction:column;align-items:center;gap:8px;color:var(--mute);font-size:.82rem}
+.center{text-align:center;max-width:620px;margin:60px auto 0}.center .orb{margin:0 auto 20px;transform:scale(.7)}
+/* modal */
+.modal{position:fixed;inset:0;z-index:60;background:rgba(5,7,13,.75);backdrop-filter:blur(10px);display:none;place-items:center;padding:20px}
+.modal.open{display:grid;animation:fade .25s}.mbox{width:min(560px,100%);padding:30px;animation:pop .35s cubic-bezier(.3,1.4,.5,1)}@keyframes pop{from{transform:scale(.92);opacity:0}}
+.mbox h3{margin:0 0 4px;font-family:Sora,Inter,sans-serif;font-size:1.4rem}.mbox ol{padding-left:20px;color:#c5cee3;font-size:.92rem}.mbox li{margin:6px 0}
+.res{margin-top:10px;font-size:.86rem}.res.ok{color:var(--good)}.res.bad{color:var(--bad)}
+#toasts{position:fixed;right:22px;bottom:22px;z-index:99;display:flex;flex-direction:column;gap:10px}
+.toast{max-width:380px;padding:14px 18px;border-radius:14px;background:#141a30;border:1px solid var(--line);box-shadow:0 20px 50px -15px #000;animation:pop .35s cubic-bezier(.3,1.4,.5,1);font-size:.9rem}
+.toast.err{border-color:rgba(251,113,133,.5);background:#2a1420}.toast.ok{border-color:rgba(52,211,153,.5)}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}.reveal.in{opacity:1;transform:none}
+@media(max-width:960px){.hero{grid-template-columns:1fr;padding-top:40px}.stage{height:440px}.wiz{grid-template-columns:1fr}.steps{flex-direction:row;gap:14px}.steps:before{display:none}.stp small{display:none}
+.feat{grid-template-columns:1fr 1fr}.livegrid{grid-template-columns:1fr}.modes{grid-template-columns:1fr}.timer{font-size:4rem}}
+@media(max-width:560px){.feat{grid-template-columns:1fr}.fc.b,.fc.d{display:none}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<div class="aurora"><i></i><i></i><i></i></div><div class="grid"></div>
+
+<nav>
+  <div class="brand"><span class="logo"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h4l2-6 4 12 2-6h4"/></svg></span>PrepAI</div>
+  <span class="sp"></span>
+  <a class="link" href="#history">Past sessions</a>
+  <button class="chip" id="keyChip"><span class="dot" id="keyDot"></span><span id="keyTxt">Add Gemini key</span></button>
+</nav>
+
+<main>
+  <header class="hero">
+    <div>
+      <span class="eyebrow"><svg viewBox="0 0 24 24" fill="#b388ff"><path d="M12 2l2.4 7.1L22 12l-7.6 2.9L12 22l-2.4-7.1L2 12l7.6-2.9z"/></svg>Powered by Google Gemini</span>
+      <h1>Walk into every interview <em>ready.</em></h1>
+      <p class="lead">Your resume, the job description and a camera. PrepAI asks the questions a real interviewer would, listens to how you answer, watches your body language, and coaches you with Gemini, privately on your own laptop.</p>
+      <div class="cta">
+        <a class="btn primary big" href="#setup" data-ripple>Start preparing &rarr;</a>
+        <button class="btn big" id="sampleBtn" style="display:none" data-ripple>See a sample report</button>
+      </div>
+      <div class="trust">
+        <span>&#128274; <b>Speech transcribed locally</b></span>
+        <span>&#127909; <b>No video stored</b></span>
+        <span>&#9889; <b>Feedback in seconds</b></span>
+      </div>
+    </div>
+    <div class="stage" id="stage">
+      <div class="orb"><i class="r"></i><i class="r"></i><i class="r"></i><div class="core"></div>
+        <div class="eq"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+      <div class="fc a"><small>Answer score</small><b><span data-count="84">0</span><span class="u">/100</span></b><div class="bar"><i style="width:84%"></i></div></div>
+      <div class="fc b"><small>Eye contact</small><b><span data-count="72">0</span><span class="u">%</span></b><div class="bar"><i style="width:72%;background:linear-gradient(90deg,#34d399,#38e1ff)"></i></div></div>
+      <div class="fc c"><small>Pace</small><b><span data-count="138">0</span> <span class="u">wpm</span></b><div class="bar"><i style="width:62%;background:linear-gradient(90deg,#38e1ff,#7c9cff)"></i></div></div>
+      <div class="fc d"><small>Filler words</small><b>1.2<span class="u"> /min</span></b><div class="bar"><i style="width:18%;background:linear-gradient(90deg,#34d399,#fbbf24)"></i></div></div>
+    </div>
+  </header>
+
+  <section id="setup" class="reveal">
+    <div class="sec-h"><div><h2>Set up your interview</h2><p>Three quick steps. Everything is saved for next time.</p></div></div>
+    <div class="glass wiz">
+      <div class="steps">
+        <div class="stp on" id="s1"><span class="n">1</span><div>Resume<small>PDF, DOCX or TXT</small></div></div>
+        <div class="stp" id="s2"><span class="n">2</span><div>The role<small>Title + job description</small></div></div>
+        <div class="stp" id="s3"><span class="n">3</span><div>Choose a mode<small>Practice or real call</small></div></div>
+      </div>
+      <div class="form">
+        <div>
+          <label class="l">Your resume</label>
+          <div class="drop" id="drop" tabindex="0">
+            <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#9db4ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V4m0 0L7 9m5-5 5 5M4 16v3a2 2 0 002 2h12a2 2 0 002-2v-3"/></svg></div>
+            <p><b>Drop your resume here</b> or click to browse</p>
+          </div>
+          <input type="file" id="file" accept=".pdf,.docx,.txt,.md" hidden>
+        </div>
+        <div>
+          <label class="l" for="role">Job role</label>
+          <input class="inp" id="role" placeholder="e.g. Machine Learning Engineer" autocomplete="off">
+          <div class="sug" id="sug"></div>
+        </div>
+        <div>
+          <label class="l" for="jd">Job description <span>paste the posting</span></label>
+          <textarea class="inp" id="jd" placeholder="Paste the full job description here. Gemini uses it to write questions and to judge how relevant your answers are."></textarea>
+          <div class="count"><span id="jdHint">Needs at least a few lines</span><span id="jdCount">0 characters</span></div>
+        </div>
+        <div>
+          <label class="l">How do you want to train?</label>
+          <div class="modes">
+            <div class="mode sel tilt" id="mPractice" role="button" tabindex="0"><span class="tick"></span>
+              <div class="mi"><svg viewBox="0 0 24 24" fill="none" stroke="#0a0e1c" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a3 3 0 00-3 3v6a3 3 0 006 0V6a3 3 0 00-3-3zM19 11a7 7 0 01-14 0M12 18v3"/></svg></div>
+              <h3>Practice with AI</h3><p>Gemini plays the interviewer and gives instant feedback after every answer.</p>
+              <ul><li>Questions tailored to your resume + role</li><li>Score, fixes and a stronger model answer</li><li>Retry any question and watch your score climb</li></ul></div>
+            <div class="mode live tilt" id="mLive" role="button" tabindex="0"><span class="tick"></span>
+              <div class="mi"><svg viewBox="0 0 24 24" fill="none" stroke="#0a0e1c" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="13" height="12" rx="3"/><path d="M16 10l5-3v10l-5-3"/></svg></div>
+              <h3>Real interview</h3><p>Runs quietly during your Meet / Zoom / Teams call and reviews it afterwards.</p>
+              <ul><li>Never pops up or distracts you</li><li>Matches interviewer questions to your answers</li><li>Full review with body-language analysis</li></ul></div>
+          </div>
+        </div>
+        <div class="go">
+          <button class="btn primary big" id="goBtn" data-ripple>Start practice interview &rarr;</button>
+          <small>Audio stays on this computer. Only text is sent to Gemini.</small>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="reveal">
+    <div class="sec-h"><div><h2>What you get</h2><p>A complete coaching loop, not just a chatbot.</p></div></div>
+    <div class="feat">
+      <div class="glass ft"><div class="fi"><svg viewBox="0 0 24 24" fill="none" stroke="#9db4ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12h6M9 16h6M7 3h7l5 5v11a2 2 0 01-2 2H7a2 2 0 01-2-2V5a2 2 0 012-2z"/></svg></div><h3>Role-aware questions</h3><p>Gemini reads your resume and the job post, then probes your gaps just like a real interviewer.</p></div>
+      <div class="glass ft"><div class="fi"><svg viewBox="0 0 24 24" fill="none" stroke="#9db4ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h3l3-8 4 16 3-8h5"/></svg></div><h3>Speech analytics</h3><p>Pace, filler words, hedging and pauses measured on-device with Whisper.</p></div>
+      <div class="glass ft"><div class="fi"><svg viewBox="0 0 24 24" fill="none" stroke="#9db4ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/></svg></div><h3>Body language</h3><p>Eye contact, head movement and posture tracked from your webcam. No video is ever saved.</p></div>
+      <div class="glass ft"><div class="fi"><svg viewBox="0 0 24 24" fill="#9db4ff"><path d="M12 2l2.4 7.1L22 12l-7.6 2.9L12 22l-2.4-7.1L2 12l7.6-2.9z"/></svg></div><h3>Gemini coaching</h3><p>A readiness score, top fixes with 5-minute drills and a personal practice plan.</p></div>
+    </div>
+  </section>
+
+  <section id="history" class="reveal">
+    <div class="sec-h"><div><h2>Past sessions</h2><p>Open any report again, or compare how you improve.</p></div></div>
+    <div id="trend"></div>
+    <div class="hist" id="hist"></div>
+  </section>
+</main>
+
+<!-- LIVE OVERLAY -->
+<div class="ov" id="live"><div class="ovin">
+  <div class="ovh"><h2>Real interview mode</h2><span class="sp"></span><span class="chip" id="sttChip"><span class="dot"></span><span id="sttTxt">Speech model</span></span></div>
+  <div class="livegrid">
+    <div class="glass tips">
+      <div class="tip"><i>1</i><div>Wear <b>headphones</b> so the interviewer's voice does not leak into your microphone.</div></div>
+      <div class="tip"><i>2</i><div>Press <b>Start</b> in the waiting room and look at the call window normally for 10 seconds (calibration).</div></div>
+      <div class="tip"><i>3</i><div><b>Minimize this window</b> and join the call. PrepAI never pops up.</div></div>
+      <div class="tip"><i>4</i><div>When the interview ends, press <b>Stop</b>. Your review is ready in a minute or two.</div></div>
+      <label class="sw"><input type="checkbox" id="cam" checked><span>Analyse my body language with the webcam <span style="color:var(--dim)">(skipped automatically if the camera is busy)</span></span></label>
+      <label class="sw"><input type="checkbox" id="consent"><span>The interviewer knows I am recording audio for my own review, or recording is allowed here.</span></label>
+    </div>
+    <div class="glass panel">
+      <span class="pill" id="lpill"><span class="dot"></span><span id="lstat">Ready</span></span>
+      <div class="timer" id="ltimer">00:00</div>
+      <div class="meter"><span>Your microphone</span><div class="segs" id="mMic"></div></div>
+      <div class="meter"><span>Call audio</span><div class="segs" id="mSys"></div></div>
+      <p class="note" id="lAudio"></p><p class="note" id="lCam"></p>
+      <div class="btns">
+        <button class="btn primary" id="lStart" data-ripple>&#9679; Start</button>
+        <button class="btn stop" id="lStop" data-ripple>Stop and get my review</button>
+        <button class="btn" id="lReport" data-ripple>Open report</button>
+        <span class="sp"></span><button class="btn" id="lBack">Back</button>
+      </div>
+    </div>
+  </div>
+</div></div>
+
+<!-- PRACTICE OVERLAY -->
+<div class="ov" id="prac"><div class="ovin"><div class="center">
+  <div class="orb"><i class="r"></i><i class="r"></i><i class="r"></i><div class="core"></div><div class="eq"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+  <h2 style="font-family:Sora,Inter,sans-serif;font-size:2rem;letter-spacing:-1px;margin:0 0 8px" id="pTitle">Your practice room is opening</h2>
+  <p class="lead" style="margin:0 auto" id="pSub">A new window will appear in a few seconds. The first run downloads the speech model.</p>
+  <div class="keys" id="pKeys">
+    <div><span class="kbd">SPACE</span>start / stop answer</div><div><span class="kbd">N</span>next question</div>
+    <div><span class="kbd">R</span>retry</div><div><span class="kbd">S</span>skip</div><div><span class="kbd">Q</span>finish &amp; review</div></div>
+  <div class="btns" style="justify-content:center"><button class="btn primary" id="pOpen" style="display:none" data-ripple>View my report &rarr;</button><button class="btn" id="pBack">Back to setup</button></div>
+</div></div></div>
+
+<!-- KEY MODAL -->
+<div class="modal" id="keyModal"><div class="glass mbox">
+  <h3>Connect Gemini</h3><p class="note" style="margin:0 0 14px">Free for personal use. Takes about a minute.</p>
+  <ol><li>Open <a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener" style="color:var(--acc)">aistudio.google.com/apikey</a> and sign in with Google.</li>
+  <li>Click <b>Create API key</b> and copy it.</li><li>Paste it below and press <b>Test key</b>.</li></ol>
+  <input class="inp" id="key" type="password" placeholder="AIza..." autocomplete="off" style="margin-top:8px">
+  <div class="res" id="keyRes"></div>
+  <label class="sw"><input type="checkbox" id="remember"><span>Remember on this computer <span style="color:var(--dim)">(saved as plain text in your user folder)</span></span></label>
+  <div class="btns"><button class="btn" id="keyTest" data-ripple>Test key</button><button class="btn primary" id="keySave" data-ripple>Save</button><span class="sp"></span><button class="btn" id="keyClose">Close</button></div>
+</div></div>
+<div id="toasts"></div>
+
+<script>
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const st={key:'',hasKey:false,resume:null,mode:'practice',whisper:'base.en',sessions:[],pollT:null};
+async function api(path,opt={}){
+  const o={method:opt.body!==undefined?'POST':'GET',headers:{'X-Tether':'1'}};
+  if(opt.raw){o.body=opt.body;} else if(opt.body!==undefined){o.headers['Content-Type']='application/json';o.body=JSON.stringify(opt.body)}
+  const r=await fetch(path,o); return r.json();
+}
+function toast(msg,type='err'){const t=document.createElement('div');t.className='toast '+type;t.textContent=msg;$('#toasts').appendChild(t);setTimeout(()=>{t.style.opacity=0;t.style.transition='.4s';setTimeout(()=>t.remove(),400)},5200)}
+/* ripple + spotlight + tilt + reveal */
+document.addEventListener('click',e=>{const b=e.target.closest('[data-ripple]');if(!b)return;const r=b.getBoundingClientRect(),s=document.createElement('span'),d=Math.max(r.width,r.height);
+ s.className='ripple';s.style.cssText=`width:${d}px;height:${d}px;left:${e.clientX-r.left-d/2}px;top:${e.clientY-r.top-d/2}px`;b.appendChild(s);setTimeout(()=>s.remove(),600)});
+document.addEventListener('mousemove',e=>{const g=e.target.closest&&e.target.closest('.glass');if(g){const r=g.getBoundingClientRect();g.style.setProperty('--mx',(e.clientX-r.left)+'px');g.style.setProperty('--my',(e.clientY-r.top)+'px')}
+ const t=e.target.closest&&e.target.closest('.tilt');if(t){const r=t.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;t.style.transform=`perspective(900px) rotateY(${x*6}deg) rotateX(${-y*6}deg) translateY(-3px)`}});
+$$('.tilt').forEach(t=>t.addEventListener('mouseleave',()=>t.style.transform=''));
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.08});
+$$('.reveal').forEach(el=>io.observe(el));
+function countUp(el){const to=+el.dataset.count;let t0=null;const f=t=>{t0=t0||t;const p=Math.min(1,(t-t0)/1600);el.textContent=Math.round(to*(1-Math.pow(1-p,3)));if(p<1)requestAnimationFrame(f)};requestAnimationFrame(f)}
+$$('[data-count]').forEach(countUp);
+
+/* key */
+function keyUI(){const ok=st.hasKey||!!st.key;$('#keyDot').className='dot'+(ok?' ok':'');$('#keyTxt').textContent=ok?'Gemini connected':'Add Gemini key'}
+function openKey(){$('#keyModal').classList.add('open');$('#key').focus()}
+$('#keyChip').onclick=openKey;$('#keyClose').onclick=()=>$('#keyModal').classList.remove('open');
+$('#keyTest').onclick=async()=>{const k=$('#key').value.trim(),r=$('#keyRes');if(!k){r.className='res bad';r.textContent='Paste a key first.';return}
+ r.className='res';r.textContent='Testing with Gemini...';const j=await api('/api/key/test',{body:{key:k}});r.className='res '+(j.ok?'ok':'bad');r.textContent=(j.ok?'\u2713 ':'')+(j.message||j.error);if(j.ok){st.key=k;keyUI()}};
+$('#keySave').onclick=()=>{const k=$('#key').value.trim();if(!k){toast('Paste your key first.');return}st.key=k;keyUI();$('#keyModal').classList.remove('open');toast('Gemini key saved for this session','ok')};
+function ensureKey(){if(st.hasKey||st.key)return true;openKey();toast('Add your free Gemini API key to continue.');return false}
+
+/* resume */
+const drop=$('#drop'),file=$('#file');
+function dropHTML(){
+ if(st.resume){drop.className='drop has';drop.innerHTML=`<div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#34d399" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" width="22" height="22"><path d="M5 12l5 5L20 7"/></svg></div><div><b>${esc(st.resume.name)}</b><p>${st.resume.words?st.resume.words+' words read':'Loaded from last time'}</p></div><span class="x" id="rx">Replace</span>`}
+ else{drop.className='drop';drop.innerHTML=`<div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#9db4ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V4m0 0L7 9m5-5 5 5M4 16v3a2 2 0 002 2h12a2 2 0 002-2v-3"/></svg></div><p><b>Drop your resume here</b> or click to browse</p>`}
+ steps()}
+function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
+async function upload(f){if(!f)return;drop.classList.add('busy');const j=await api('/api/upload?name='+encodeURIComponent(f.name),{raw:true,body:f});drop.classList.remove('busy');
+ if(!j.ok){toast(j.error||'Upload failed');shake(drop);return}st.resume={path:j.path,name:j.name,words:j.words};dropHTML();toast('Resume read successfully','ok')}
+drop.onclick=()=>file.click();file.onchange=()=>upload(file.files[0]);
+['dragenter','dragover'].forEach(e=>drop.addEventListener(e,ev=>{ev.preventDefault();drop.classList.add('over')}));
+['dragleave','drop'].forEach(e=>drop.addEventListener(e,ev=>{ev.preventDefault();drop.classList.remove('over')}));
+drop.addEventListener('drop',ev=>upload(ev.dataTransfer.files[0]));
+
+/* form */
+['Software Engineer','Data Analyst','Machine Learning Engineer','SOC Analyst','Product Manager','Backend Engineer'].forEach(r=>{const b=document.createElement('button');b.textContent=r;b.onclick=()=>{$('#role').value=r;steps()};$('#sug').appendChild(b)});
+function steps(){const a=!!st.resume,b=$('#role').value.trim().length>1&&$('#jd').value.trim().length>=40;
+ $('#s1').className='stp '+(a?'done':'on');$('#s2').className='stp '+(b?'done':a?'on':'');$('#s3').className='stp '+(a&&b?'on':'');
+ const n=$('#jd').value.trim().length;$('#jdCount').textContent=n+' characters';const h=$('#jdHint');h.textContent=n>=40?'\u2713 Looks good':'Needs at least a few lines';h.className=n>=40?'ok':''}
+$('#role').oninput=steps;$('#jd').oninput=steps;
+function shake(el){el.classList.remove('shake');void el.offsetWidth;el.classList.add('shake');setTimeout(()=>el.classList.remove('shake'),600)}
+function setMode(m){st.mode=m;$('#mPractice').classList.toggle('sel',m==='practice');$('#mLive').classList.toggle('sel',m==='live');
+ $('#goBtn').innerHTML=m==='practice'?'Start practice interview &rarr;':'Continue to live setup &rarr;'}
+$('#mPractice').onclick=()=>setMode('practice');$('#mLive').onclick=()=>setMode('live');
+function body(){return{key:st.key,role:$('#role').value,jd:$('#jd').value,resume_path:st.resume?st.resume.path:'',whisper:st.whisper,remember:$('#remember').checked}}
+function focusField(f){const m={resume:drop,role:$('#role'),jd:$('#jd')};if(f==='key'){openKey();return}const el=m[f];if(el){el.scrollIntoView({behavior:'smooth',block:'center'});shake(el);if(el.focus&&el!==drop)el.focus()}}
+$('#goBtn').onclick=async()=>{
+ if(!st.resume){toast('Upload your resume first.');return focusField('resume')}
+ if($('#role').value.trim().length<2){toast('Enter the job role.');return focusField('role')}
+ if($('#jd').value.trim().length<40){toast('Paste the job description (a few lines at least).');return focusField('jd')}
+ if(!ensureKey())return;
+ const btn=$('#goBtn'),old=btn.innerHTML;btn.disabled=true;btn.innerHTML='Getting ready...';
+ try{
+  if(st.mode==='practice'){const j=await api('/api/practice',{body:body()});if(!j.ok){toast(j.error);focusField(j.field);return}openPractice()}
+  else{const j=await api('/api/live/prepare',{body:body()});if(!j.ok){toast(j.error);focusField(j.field);return}openLive()}
+ }catch(e){toast('Could not reach the Tether server: '+e)}finally{btn.disabled=false;btn.innerHTML=old}};
+
+/* practice overlay */
+function openPractice(){$('#prac').classList.add('open');$('#pOpen').style.display='none';$('#pKeys').style.display='';$('#pTitle').textContent='Your practice room is opening';
+ $('#pSub').textContent='A new window will appear in a few seconds. The first run downloads the speech model.';clearInterval(st.pollT);
+ st.pollT=setInterval(async()=>{const j=await api('/api/practice/state');if(!j.running){clearInterval(st.pollT);
+  $('#pKeys').style.display='none';
+  if(j.code&&j.code!==0){$('#pTitle').textContent='The practice window closed early';$('#pSub').textContent='It exited with an error (code '+j.code+'). Look at the console window it opened for the reason.'}
+  else{$('#pTitle').textContent='Session finished';$('#pSub').textContent='Your review is ready. Open it to see your score, radar, fixes and practice plan.';await loadSessions();if(st.sessions.length){$('#pOpen').style.display=''}}}},1500)}
+$('#pOpen').onclick=()=>{if(st.sessions[0])window.open('/reports/'+st.sessions[0].id+'.html','_blank')};
+$('#pBack').onclick=()=>{clearInterval(st.pollT);$('#prac').classList.remove('open')};
+
+/* live overlay */
+function mkSegs(el){for(let i=0;i<30;i++)el.appendChild(document.createElement('i'))}mkSegs($('#mMic'));mkSegs($('#mSys'));
+function paint(el,v){const n=Math.round(v/100*30);[...el.children].forEach((c,i)=>{c.className=i<n?(i>24?'hot':'on'):'';c.style.height=(30+(i/30)*70)+'%'})}
+function openLive(){$('#live').classList.add('open');$('#consent').checked=false;poll();clearInterval(st.pollT);st.pollT=setInterval(poll,300)}
+const fmt=e=>String(Math.floor(e/60)).padStart(2,'0')+':'+String(Math.floor(e%60)).padStart(2,'0');
+let lastReport=null;
+async function poll(){let j;try{j=await api('/api/live/state')}catch(e){return}
+ const m={recording:['rec','Recording'],calibrating:['cal',j.status||'Calibrating'],processing:['proc',j.status||'Processing'],done:['done','Review ready'],error:['rec','Error'],idle:['','Ready']}[j.state]||['',j.status];
+ $('#lpill').className='pill '+m[0];$('#lstat').textContent=j.state==='error'?(j.status+': '+j.error):m[1];
+ $('#ltimer').textContent=fmt(j.elapsed);$('#ltimer').className='timer'+(j.state==='recording'?' rec':'');
+ paint($('#mMic'),j.mic);paint($('#mSys'),j.sys);$('#lAudio').textContent=j.audio_note;$('#lCam').textContent=j.camera_note;
+ const busy=['calibrating','recording','processing'].includes(j.state),c=$('#consent').checked;
+ $('#lStart').disabled=!(c&&!busy);$('#lStop').disabled=!['calibrating','recording'].includes(j.state);$('#lReport').disabled=!j.report;$('#lBack').disabled=busy;
+ const sc={loading:['','Loading speech model...'],ready:['ok','Speech model ready'],error:['','Speech model failed'],none:['','Speech model']}[j.stt];$('#sttTxt').textContent=sc[1];$('#sttChip').querySelector('.dot').className='dot '+sc[0];
+ if(j.report&&j.report!==lastReport){lastReport=j.report;loadSessions();toast('Your review is ready','ok')}
+ st.lastReport=j.report}
+$('#consent').onchange=poll;
+$('#lStart').onclick=async()=>{const j=await api('/api/live/start',{body:{consent:$('#consent').checked,camera:$('#cam').checked}});if(!j.ok)toast(j.error);poll()};
+$('#lStop').onclick=async()=>{await api('/api/live/stop',{body:{}});poll()};
+$('#lReport').onclick=()=>{if(st.lastReport)window.open('/reports/'+st.lastReport+'.html','_blank')};
+$('#lBack').onclick=()=>{clearInterval(st.pollT);$('#live').classList.remove('open')};
+
+/* history */
+function tone(s){return s>=75?'#34d399':s>=50?'#fbbf24':'#fb7185'}
+function mring(score){const r=29,c=2*Math.PI*r,s=score==null?0:score;return `<div class="mring"><svg width="70" height="70" viewBox="0 0 70 70"><circle cx="35" cy="35" r="${r}" fill="none" stroke="rgba(255,255,255,.09)" stroke-width="7"/><circle cx="35" cy="35" r="${r}" fill="none" stroke="${tone(s)}" stroke-width="7" stroke-linecap="round" stroke-dasharray="${c}" stroke-dashoffset="${c*(1-s/100)}"/></svg><b>${score==null?'-':Math.round(score)}</b></div>`}
+async function loadSessions(){st.sessions=await api('/api/sessions');const h=$('#hist');
+ if(!st.sessions.length){h.innerHTML='<div class="glass empty" style="grid-column:1/-1">No sessions yet. Your first review will show up here.</div>';$('#trend').innerHTML='';$('#sampleBtn').style.display='none';return}
+ $('#sampleBtn').style.display='';
+ h.innerHTML=st.sessions.map(s=>{const d=s.created?new Date(s.created).toLocaleString([], {dateStyle:'medium',timeStyle:'short'}):'';
+  return `<a class="glass hc" href="/reports/${s.id}.html" target="_blank">${mring(s.score)}<div><h4>${esc(s.role||'Interview')}</h4><small>${esc(d)}</small><span class="tag ${s.mode==='live'?'live':''}">${s.mode==='live'?'real interview':'practice'}${s.readiness?' \u00b7 '+esc(s.readiness):''}</span></div></a>`}).join('');
+ const sc=st.sessions.filter(s=>s.score!=null&&s.mode!=='live').reverse().map(s=>s.score);
+ if(sc.length>=2){const W=640,H=70,p=10,lo=Math.max(0,Math.min(...sc)-10),hi=Math.min(100,Math.max(...sc)+10),pts=sc.map((v,i)=>[p+i*(W-2*p)/(sc.length-1),H-p-((v-lo)/Math.max(1,hi-lo))*(H-2*p)]),d=pts.map((q,i)=>(i?'L':'M')+q[0].toFixed(1)+','+q[1].toFixed(1)).join(' ');
+  const delta=sc[sc.length-1]-sc[0];
+  $('#trend').innerHTML=`<div class="glass trend"><div><b style="color:${delta>=0?'#34d399':'#fb7185'}">${delta>=0?'+':''}${Math.round(delta)}</b><span>points across your ${sc.length} practice sessions</span></div><svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none"><defs><linearGradient id="tg" x1="0" x2="1"><stop offset="0" stop-color="#38e1ff"/><stop offset="1" stop-color="#b388ff"/></linearGradient></defs><path d="${d}" fill="none" stroke="url(#tg)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"/>${pts.map(q=>`<circle cx="${q[0]}" cy="${q[1]}" r="4" fill="#fff" stroke="#7c9cff" stroke-width="2"/>`).join('')}</svg></div>`}
+ else $('#trend').innerHTML=''}
+$('#sampleBtn').onclick=()=>{if(st.sessions[0])window.open('/reports/'+st.sessions[0].id+'.html','_blank')};
+
+/* boot */
+(async()=>{
+ try{const c=await api('/api/config');st.hasKey=c.has_key;st.whisper=c.whisper||'base.en';$('#role').value=c.role||'';$('#jd').value=c.jd||'';
+  if(c.resume)st.resume={path:c.resume.path,name:c.resume.name};$('#remember').checked=!!c.remembered;}catch(e){toast('Could not reach the Tether server.')}
+ keyUI();dropHTML();steps();setMode('practice');loadSessions();
+ if(!st.hasKey)setTimeout(()=>{if(!st.hasKey&&!st.key)openKey()},1400);
+})();
+</script>
+</body>
+</html>

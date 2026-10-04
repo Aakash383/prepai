@@ -1,12 +1,14 @@
+# Core
+google-genai>=1.0        # Gemini API (replaces the old anthropic package)
+numpy
 opencv-python
 mediapipe
-numpy
+faster-whisper           # local speech-to-text (audio never leaves your laptop)
 sounddevice
-pygetwindow; platform_system == "Windows"
-# optional: AI coaching note in the report (set ANTHROPIC_API_KEY)
-anthropic
-# interview coach (interview.py)
-faster-whisper
-pyttsx3
-pypdf
-python-docx
+pypdf                    # read PDF resumes
+python-docx              # read DOCX resumes
+
+# Optional
+pyttsx3                  # reads interview questions aloud
+soundcard                # captures call audio (interviewer) in real-interview mode
+pygetwindow              # only used by the focus tracker (tether.py)

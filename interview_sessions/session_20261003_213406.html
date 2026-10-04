@@ -1,0 +1,76 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Interview review</title><style>
+:root{--bg:#f3f1ec;--panel:#fbfaf7;--ink:#17212b;--mute:#5d6975;--line:#d9d5cc;
+--good:#1f9d6b;--mid:#d98a10;--bad:#d64545;--mark:#1a82b3}
+@media (prefers-color-scheme:dark){:root{--bg:#12171d;--panel:#1a2129;--ink:#e8ecef;--mute:#98a3ad;
+--line:#2b353f;--good:#3ecf8e;--mid:#f5b942;--bad:#ef6a6a;--mark:#4cc9f0}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);
+font:16px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:980px;margin:0 auto;padding:40px 20px 64px}
+h1{font:600 clamp(2rem,5vw,3.2rem)/1.1 "Iowan Old Style",Palatino,Georgia,serif;margin:0 0 6px}
+h2{font:600 1.35rem/1.2 "Iowan Old Style",Palatino,Georgia,serif;margin:44px 0 14px}
+.sub{color:var(--mute);margin:0}
+.hero{display:flex;gap:28px;align-items:flex-end;flex-wrap:wrap;margin:26px 0 8px}
+.big{font:600 clamp(4rem,12vw,7rem)/0.9 "Iowan Old Style",Palatino,Georgia,serif}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-top:22px}
+.kpi{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.kpi b{display:block;font-size:1.5rem;font-weight:600}.kpi span{color:var(--mute);font-size:.9rem}
+.chart{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px}
+.chart svg{display:block;width:100%;height:auto}
+.legend{display:flex;gap:18px;flex-wrap:wrap;color:var(--mute);font-size:.88rem;margin-top:10px}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+.coach{background:var(--panel);border:1px solid var(--line);border-left:5px solid var(--mark);
+border-radius:10px;padding:20px 24px;max-width:70ch}
+.coach h4{margin:18px 0 6px;font-size:1rem}.coach h4:first-child{margin-top:0}
+.coach p{margin:0 0 10px}.coach ul{margin:0 0 6px;padding-left:20px}.coach li{margin:4px 0}
+.badge{display:inline-block;font-size:.8rem;color:var(--mute);margin-bottom:10px}
+table{width:100%;border-collapse:collapse;background:var(--panel);border:1px solid var(--line);
+border-radius:10px;overflow:hidden}
+th,td{text-align:left;padding:10px 14px;border-bottom:1px solid var(--line);font-size:.95rem}
+th{color:var(--mute);font-weight:500}tr:last-child td{border-bottom:0}
+.bar{height:8px;border-radius:4px;background:var(--line);min-width:120px}
+.bar i{display:block;height:100%;border-radius:4px}
+.scroll{overflow-x:auto}
+footer{margin-top:48px;color:var(--mute);font-size:.88rem;max-width:70ch}
+
+.hero2{display:flex;gap:28px;align-items:center;flex-wrap:wrap;margin:24px 0 10px}
+.pill{display:inline-block;padding:3px 12px;border-radius:99px;border:1px solid var(--line);
+font-size:.9rem;background:var(--panel)}
+.three{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px 18px}
+.card h3{margin:0 0 4px;font-size:1.05rem}.card .num{font-size:1.9rem;font-weight:600}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px}
+.tile{background:var(--panel);border:1px solid var(--line);border-left:5px solid var(--line);
+border-radius:10px;padding:12px 14px}
+.tile.good{border-left-color:var(--good)}.tile.ok{border-left-color:var(--mid)}
+.tile.bad{border-left-color:var(--bad)}
+.tile b{display:block;font-size:1.35rem}.tile span{color:var(--mute);font-size:.85rem}
+.fix{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px 20px;margin-bottom:12px}
+.fix h3{margin:0 0 6px}.fix .drill{margin-top:8px;padding-top:8px;border-top:1px dashed var(--line)}
+details{background:var(--panel);border:1px solid var(--line);border-radius:10px;margin-bottom:10px}
+summary{cursor:pointer;padding:14px 18px;font-weight:600}
+details .in{padding:0 18px 16px}details h4{margin:14px 0 4px}
+.chip{display:inline-block;margin:3px 6px 3px 0;padding:2px 10px;border-radius:99px;font-size:.85rem;
+border:1px solid var(--line)}.chip.g{border-color:var(--good)}.chip.r{border-color:var(--bad)}
+.tr{white-space:pre-wrap;color:var(--mute);font-size:.93rem;max-width:80ch}
+.delta.up{color:var(--good)}.delta.down{color:var(--bad)}
+</style></head><body><main>
+<h1>Interview review</h1>
+<p class="sub">SOC Analyst &middot; Saturday 03 October 2026, 21:34 &middot;
+real interview</p>
+<div class="hero2"><div class="big">38</div><div>
+<span class="pill">Not yet</span> 
+<p style="max-width:48ch;margin:8px 0 0">You named a relevant project, but the answer was short, trailed off without a conclusion, and said little about your SOC experience, which is what this role requires.</p></div></div>
+<div class="three"><div class="card"><h3>Your answers</h3><div class="num">4<small>/10</small></div><p>The only question visible is a &#x27;tell me about yourself&#x27; prompt. Your answer covered your education, a brief mention of SOC work in India, and the phishing detection publication. The SOC claim (&#x27;I used to work as a SOC&#x27;) was vague, with no tools, alert types, volumes or outcomes, even though the role requires 2+ years as a SOC analyst. The phishing project explanation (extracting IOCs from URLs, classifying them, blocking) was the clearest part, but it ended with &#x27;a useful one. Yeah, but that&#x27;s it&#x27; and no link to the job.</p></div><div class="card"><h3>Your delivery</h3><div class="num">4<small>/10</small></div><p>At 99 wpm you were well below the 120-165 range, and there were 4 long pauses (longest 8.6s) plus a first word after 8.7s, so you came across as hesitant. Filler words were low (1 in total), which is good. Some phrases were garbled or unfinished (&#x27;UNS term Michigan day one&#x27;, &#x27;also like we... useful one&#x27;), and the vocal variation of 0.42 suggests a fairly flat tone.</p></div><div class="card"><h3>Your body language</h3><div class="num">5<small>/10</small></div><p>Eye contact was about 42% (45% then 33%), below the natural 55-80% range and dropping in the second half, and you looked away for 2s+ four times, longest 4s. You stayed in frame the whole time and head motion was steady at 5.6 deg/s. You were too close to the camera about 8% of the time, and smiling was limited at 17%, which can read as reserved.</p></div></div>
+<h2>The numbers</h2><div class="tiles"><div class="tile ok"><b>42%</b><span>Eye contact<br>target 55-80%</span></div><div class="tile good"><b>5.6 deg/s</b><span>Head movement<br>steady is under 6</span></div><div class="tile good"><b>0%</b><span>Leaning back<br>of the time</span></div><div class="tile good"><b>4</b><span>Looked away 2s+<br>longest 4s</span></div><div class="tile "><b>17%</b><span>Smiling<br>of the time</span></div><div class="tile bad"><b>99 wpm</b><span>Pace<br>target 120-165</span></div><div class="tile good"><b>0.9/min</b><span>Filler words<br>1 total, aim under 3</span></div><div class="tile good"><b>0</b><span>Hedging<br>&#x27;I think&#x27;, &#x27;maybe&#x27;...</span></div><div class="tile "><b>4</b><span>Long pauses<br>longest 8.6s</span></div></div>
+<p class="sub" style="margin-top:8px">Camera numbers are estimates of observable behaviour, not emotions.
+Eye contact means facing and looking toward the camera.</p>
+<h2>Fix these first</h2><div class="fix"><h3>Turn the vague SOC mention into specific proof</h3><p>You said &#x27;I used to work as a SOC, I&#x27;m just back in India&#x27; with no detail. The job asks for 2+ years as a SOC analyst, so this is the most important claim to back up. Your resume shows Splunk, Microsoft Defender, KQL/SPL, Azure Logic Apps SOAR and MITRE ATT&amp;CK, but none of these came up. Name the tools, the kinds of alerts you triaged, and one result (for example, the resume&#x27;s claim of 40% less manual triage or 25% lower MTTR, if accurate and you can explain it).</p><p class="drill"><b>5-minute drill:</b> Write a 3-sentence SOC statement: where/when you did it, tools you used, one measurable outcome. Say it aloud five times until it takes about 20 seconds without pausing.</p></div><div class="fix"><h3>Use a structured 60-90 second intro with a clear ending</h3><p>Your answer lasted about 79s but was fragmented: education, then India, then projects, then publication, then it trailed off (&#x27;Yeah, that&#x27;s it&#x27;). Use a present-past-future structure: who you are now (MS in Cybersecurity), what you&#x27;ve done (SOC work, Splunk lab, phishing detection publication), and why this SOC Analyst role is the next step. End with a deliberate closing line rather than &#x27;that&#x27;s it&#x27;.</p><p class="drill"><b>5-minute drill:</b> Record yourself giving the intro in three parts, each 20-30 seconds, using bullet notes. Replay and check it ends on a sentence about the role, not a fade-out.</p></div><div class="fix"><h3>Fix pace, opening delay and eye contact</h3><p>Your first word came after 8.7s, your pace was 99 wpm, and you had a pause of 8.6s, which makes you sound unsure even when the content is good. Eye contact fell from 45% to 33% in the second minute, probably when you were searching for words. Start within 2-3 seconds, speak at a steadier pace, and look at the camera lens when you finish a point.</p><p class="drill"><b>5-minute drill:</b> Do five 30-second answers to random prompts, starting within 3 seconds each time. Put a sticky note next to the lens and glance at it at the end of each sentence. Aim for about 130 wpm.</p></div>
+<h2>What you did well</h2><ul><li>You picked a relevant, concrete project: using machine learning to extract IOCs from URLs and block phishing sites matches SOC threat-detection work.</li><li>Your head movement was steady and you stayed fully in frame, which looks composed.</li><li>Filler words were minimal (1 &#x27;like&#x27;), so your speech was not cluttered with verbal crutches.</li></ul>
+<h2>Question by question</h2><div class="fix"><h3>Tell me about yourself (inferred intro question) <span class="pill">4/10</span></h3><p>You gave your name, your Master&#x27;s at Michigan, a brief mention of past SOC work in India, current cybersecurity/AI projects, and the phishing detection publication. The phishing description (ML to extract IOCs from URLs, classify, block) was relevant, but the SOC experience had no detail and the ending (&#x27;a useful one. Yeah, but that&#x27;s it&#x27;) was weak. Add specific tools, a result, and a closing line tying you to this role.</p></div>
+<h2>Job description coverage</h2><p><span class="chip g">Threat detection / IOC analysis (phishing project)</span><span class="chip g">Machine learning and automation mindset (Python-based work, in the project)</span><span class="chip r">SIEM triage and investigation (Splunk, KQL/SPL) was on your resume but not mentioned</span><span class="chip r">SOAR configuration (Azure Logic Apps)</span><span class="chip r">Incident escalation and communicating event history and impact to management</span><span class="chip r">Cloud experience (Azure/AWS)</span><span class="chip r">Knowledge of internet protocols (TCP/IP, DNS) and MITRE ATT&amp;CK</span><span class="chip r">Teamwork in a fast-paced environment and customer-service orientation</span><span class="chip r">Certifications (Security+ in progress) and the 2+ years SOC requirement</span></p><p class="sub">Green: shown in your answers. Red: important, not shown yet.</p><h2>Your practice plan</h2><ol><li>Draft and rehearse a 75-second intro covering present, past (specific SOC experience with tools and one metric) and future (why this role), then record and review it.</li><li>Prepare three STAR stories from your resume: triaging an alert in Splunk or Defender, building the Azure Logic Apps SOAR workflow, and explaining a PCAP analysis that reduced false positives. Be ready to explain the numbers.</li><li>Practise a mock interview with a friend or on video, focusing on starting within 3 seconds, keeping pace near 130 wpm, and looking at the camera when you wrap up each point.</li></ol>
+<footer>Privacy: audio (your microphone and, in real-interview mode, the call audio) is processed in memory and transcribed on this laptop, then discarded. No video is
+stored. Transcripts and numbers are saved in the interview_sessions folder on this computer; delete it any time.
+Text of your resume, the job description and transcripts is sent to the Anthropic API to produce the feedback.</footer>
+</main></body></html>

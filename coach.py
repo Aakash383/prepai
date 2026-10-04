@@ -1,18 +1,20 @@
-"""Claude-powered interview coaching.
+"""Gemini-powered interview coaching.
 
 * prepare()          resume + role + job description -> fit brief and tailored questions
 * evaluate_answer()  one answer (transcript + delivery + camera metrics) -> fast feedback
 * final_review()     whole session -> readiness score, top fixes, drills, practice plan
 
-Needs ANTHROPIC_API_KEY. Models can be changed with TETHER_MODEL (deep review) and
-TETHER_FAST_MODEL (per-answer feedback).
+Needs GEMINI_API_KEY (free at https://aistudio.google.com/apikey). Models can be changed with
+TETHER_MODEL (deep review) and TETHER_FAST_MODEL (per-answer feedback).
 """
 import json
 import os
 import re
 
-MAIN_MODEL = os.environ.get("TETHER_MODEL", "claude-sonnet-5-5")
-FAST_MODEL = os.environ.get("TETHER_FAST_MODEL", "claude-haiku-4-5-20251001")
+import llm
+
+MAIN_MODEL = llm.MAIN_MODEL
+FAST_MODEL = llm.FAST_MODEL
 
 SYSTEM = """You are an experienced interview coach: specific, honest and kind.
 Rules:
@@ -29,43 +31,11 @@ BENCH = ("Rough benchmarks: eye contact toward the camera 55-80% is natural; pac
          "filler words under 3/min; first word within 1-4 s of the question; behavioural answers run "
          "about 60-120 s; head motion under ~6 deg/s reads as steady; a few long pauses are fine.")
 
-_client = None
-
-
-def client():
-    global _client
-    if _client is None:
-        if not os.environ.get("ANTHROPIC_API_KEY"):
-            raise RuntimeError("ANTHROPIC_API_KEY is not set")
-        import anthropic
-        _client = anthropic.Anthropic(max_retries=3, timeout=120.0)
-    return _client
-
-
-def parse_json(text):
-    t = re.sub(r"^```(?:json)?\s*|\s*```$", "", text.strip())
-    try:
-        return json.loads(t)
-    except json.JSONDecodeError:
-        i, j = t.find("{"), t.rfind("}")
-        if i != -1 and j > i:
-            return json.loads(t[i:j + 1])
-        raise
+parse_json = llm.parse_json
 
 
 def ask_json(model, user, max_tokens):
-    msgs = [{"role": "user", "content": user}]
-    for attempt in range(2):
-        resp = client().messages.create(model=model, max_tokens=max_tokens,
-                                        system=SYSTEM, messages=msgs)
-        text = "".join(b.text for b in resp.content if getattr(b, "type", "") == "text")
-        try:
-            return parse_json(text)
-        except json.JSONDecodeError:
-            if attempt == 1:
-                raise
-            msgs += [{"role": "assistant", "content": text},
-                     {"role": "user", "content": "That was not valid JSON. Reply with only the JSON object."}]
+    return llm.generate_json(SYSTEM, user, model=model, max_tokens=max_tokens)
 
 
 # ------------------------------------------------------------------ inputs
@@ -140,7 +110,7 @@ Each question is one or two spoken sentences."""
 
 def evaluate_answer(ctx, question, qtype, transcript, speech_m, behavior_m, attempt=1):
     if len(transcript.split()) < 5:
-        return dict(score=0, scores={}, strengths=[], missing_keywords=[], better_answer="",
+        return dict(score=0, scores={}, relevance={}, strengths=[], missing_keywords=[], better_answer="",
                     improvements=["No clear speech was detected. Check your microphone and speak "
                                   "towards it, then try again."])
     user = f"""{ctx}
@@ -152,6 +122,7 @@ This is attempt {attempt} at this question.
 
 Return JSON:
 {{"score": 0-100 overall quality of this answer for THIS role,
+ "relevance": {{"verdict": "relevant" | "partly relevant" | "off topic", "note": "one sentence: does it actually answer the question and fit the job description?"}},
  "scores": {{"relevance": 1-10, "structure": 1-10, "specificity": 1-10, "confidence": 1-10, "role_fit": 1-10}},
  "strengths": ["2 short strengths"],
  "improvements": ["2-3 specific fixes, each under 22 words, covering content and delivery"],
@@ -160,25 +131,35 @@ Return JSON:
     return ask_json(FAST_MODEL, user, 1100)
 
 
-def final_review(ctx, role, mode, answers, overall_speech, overall_behavior, prev_score=None):
+def final_review(ctx, role, mode, answers, overall_speech, overall_behavior, prev_score=None,
+                 separated=False):
     parts = []
     for a in answers:
         ev = a.get("eval") or {}
-        if mode == "live":
+        if mode == "live" and not separated:
             body = "\n".join(f"[{int(t // 60)}:{int(t % 60):02d}] {s}" for t, s in a.get("lines", []))[:14000]
         else:
             body = (a.get("transcript") or "")[:2500]
         parts.append(
-            f"--- Q{a['q_idx'] + 1} attempt {a['attempt']}: {a['question']}\n"
+            f"--- Q{a['q_idx'] + 1} attempt {a['attempt']}: {a['question'][:600]}\n"
             f"Transcript:\n{body}\n{metrics_text(a.get('speech'), a.get('behavior'))}\n"
             f"Per-answer score: {ev.get('score', 'n/a')}; fixes noted: {ev.get('improvements', [])}")
     mins = ", ".join(f"{v:.0f}" for v in (overall_behavior or {}).get("ec_by_minute", [])[:90])
     trend = f"Previous practice score for this role: {prev_score}." if prev_score is not None else ""
-    live_note = ("This was a REAL/LIVE interview recorded as one continuous transcript from the "
-                 "candidate's microphone; it may include the interviewer's voice. Infer who is speaking, "
-                 "and fill qa_breakdown with each question and the candidate's answer quality.\n"
-                 if mode == "live" else "This was a practice interview; answers may have several attempts, "
-                 "so comment on improvement between attempts.\n")
+    if mode == "live" and separated:
+        live_note = ("This was a REAL interview. Questions come from the interviewer's audio track and answers "
+                     "from the candidate's microphone, matched automatically. Ignore small talk when scoring, "
+                     "and judge how relevant each answer was to the job description.\n")
+    elif mode == "live":
+        live_note = ("This was a REAL/LIVE interview recorded as one continuous transcript from the "
+                     "candidate's microphone; it may include the interviewer's voice. Infer who is speaking, "
+                     "and fill qa_breakdown with each question and the candidate's answer quality.\n")
+    else:
+        live_note = ("This was a practice interview; answers may have several attempts, "
+                     "so comment on improvement between attempts.\n")
+    cam_note = ("" if overall_behavior else
+                "Camera data was not available: set body_language.score to 0 and its summary to "
+                "'Camera data was not available for this session.'\n")
     user = f"""{ctx}
 {live_note}{trend}
 Session data:
@@ -186,6 +167,7 @@ Session data:
 
 Overall speech: {metrics_text(overall_speech, None)}
 Overall camera: {metrics_text(None, overall_behavior)}
+{cam_note}
 Eye contact per minute (%): {mins}
 {BENCH}
 
@@ -201,6 +183,6 @@ Return JSON:
  "jd_coverage": {{"covered": ["job-description skills demonstrated"], "missing": ["important ones not shown"]}},
  "practice_plan": ["3 concrete next steps"],
  "qa_breakdown": [{{"question": "...", "rating": 1-10, "feedback": "..."}}]}}
-Give exactly 3 top_improvements ordered by impact. qa_breakdown is only for live interviews; otherwise [].
+Give exactly 3 top_improvements ordered by impact. qa_breakdown must be [] unless this was a live interview recorded as ONE mixed transcript.
 Do not name specific people or companies unless they appear in the data."""
     return ask_json(MAIN_MODEL, user, 3000)

@@ -1,0 +1,46 @@
+Job Overview
+
+We are currently looking to hire an Information Security Analyst II within the Security Operations Centers (SOC), which is a part of LPL’s Technology Information Security organization. The SOC Analyst is a high visibility position, which is responsible for activities relating to monitoring and responding to security events. The SOC analyst receives, researches, triages and documents all security events and alerts as they are received. This individual supports multiple security-related platforms and technologies, interfacing with others within the IT organization, as well as other internal business units and external customers/partners. Events will be generated from endpoints, networks, security information and event management (SIEM) systems, threat intelligence platforms, employees, third-parties and other sources.
+
+The SOC analyst reports to the SOC manager and is an involved member of the SOC team. This role must display an understanding of new trends and technologies related to IT security and compliance, and contribute to the company IT security strategy and roadmap.
+
+Please note: This position does not offer work authorization sponsorship now or in the future. Applicants must have valid U.S. work authorization that does not require employer sponsorship.
+
+Responsibilities:
+
+Monitor and process responses for security events as an active member of the team
+Triage, investigate and respond to events produced by our SIEM solution by utilizing a wide array of tools to mitigate active threats.
+Enforce information security policy, standards and guidelines for business operations and technology requirements.
+Identify IT security risks from technical and functional perspectives.
+Notify management of suspected incidents and articulate the event’s history, status and potential impact.
+Assist with Incident Responders when an escalation is required by providing a detailed recount of events.
+Configure and work with SIEM and SOAR tools.
+Work effectively in a fast-paced team environment by communicating in a detailed, concise manner.
+Maintain working knowledge of threat detection as the industry evolves.
+Perform other duties as assigned supporting the SOC as needed.
+
+
+What are we looking for?
+
+We’re looking for strong collaborators who deliver exceptional client experiences and thrive in fast-paced, team-oriented environments. Our ideal candidates pursue greatness, act with integrity, and are driven to help our clients succeed. We value those who embrace creativity, continuous improvement, and contribute to a culture where we win together and create and share joy in our work.
+
+Requirements:
+
+2+ years of experience as a SOC analyst is required.
+
+
+Core Competencies:
+
+The ability to adapt to changing environments or alternative methods
+Be customer service oriented with the ability to meet customer expectations within project scope
+Track record of acting with integrity, taking pride in work, seeking to excel, being curious and adaptable, and communicating effectively.
+
+
+Preferences:
+
+College degree in associated field
+Experience with Cloud services like Azure and AWS is a plus.
+Experience with scripting languages, such as Python, etc.
+Knowledge of a variety of Internet protocols.
+Professional certification (GCIH, CySA+, etc.)
+Experience on 4 Security Controls

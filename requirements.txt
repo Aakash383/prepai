@@ -1,0 +1,12 @@
+opencv-python
+mediapipe
+numpy
+sounddevice
+pygetwindow; platform_system == "Windows"
+# optional: AI coaching note in the report (set ANTHROPIC_API_KEY)
+anthropic
+# interview coach (interview.py)
+faster-whisper
+pyttsx3
+pypdf
+python-docx
